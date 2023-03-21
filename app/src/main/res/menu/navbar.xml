@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:icon="@drawable/home_navbar_icon"
+        android:id="@+id/homeIcon"/>
+    <item android:title="Notifications"
+        android:icon="@drawable/notifications_navbar_icon"
+        android:id="@+id/notificationsIcon"/>
+    <item android:title="Metrics"
+        android:icon="@drawable/metrics_navbar_icon"
+        android:id="@+id/metricsIcon"/>
+    <item android:title="History"
+        android:icon="@drawable/history_navbar_icon"
+        android:id="@+id/historyIcon"/>
+</menu>
