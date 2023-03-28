@@ -6,9 +6,19 @@
     tools:context=".ui.home.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
+<!--    <com.example.hydroboost.ui.home.WaterFillingView-->
+<!--        android:id="@+id/waterFilling"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Home Fragment" />
+    
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:src="@drawable/hydroboost_logo_background" />-->
 
 </FrameLayout>
