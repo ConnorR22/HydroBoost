@@ -17,10 +17,11 @@
 
     </FrameLayout>
     <!-- Try changing width in layout_width="match_parent" -->
+    <!--        android:background="#001220"-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#001220"
+        android:background="@color/color6"
         android:id="@+id/navBar"
         app:menu="@menu/navbar"
         app:layout_constraintBottom_toBottomOf="parent"
