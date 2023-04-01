@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
+import androidx.lifecycle.lifecycleScope
 import com.example.hydroboost.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +50,14 @@ class HomeFragment : Fragment() {
         addWater(rootView, 371, ((1434 * .9).toInt()), 338, ((1434 * .1).toInt()))
         addWaterBottle(rootView)
 
+        val logWaterButton : Button = rootView.findViewById(R.id.log_water_button)
+        logWaterButton.setOnClickListener {
+            val manager = requireActivity().supportFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.frameLayout, LogWaterFragment())
+            transaction.commit()
+        }
+
         return rootView
     }
 
@@ -56,15 +65,33 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view as ViewGroup
 
-        for (i in 1 .. 9) {
-            view.postDelayed({
+        lifecycleScope.launch {
+            for (i in 1..9) {
                 fillWaterBottle(view, i)
-            }, (1000 * i).toLong())
+                delay(1000)
+            }
+            removeWater(view)
         }
 
-        view.postDelayed({
-            removeWater(view)
-        }, 10000)
+        val hydration_message_ids : Array<Int> = arrayOf(
+            R.string.hydration_message_1,
+            R.string.hydration_message_2,
+            R.string.hydration_message_3,
+            R.string.hydration_message_4,
+            R.string.hydration_message_5,
+        )
+        var count = 0
+        lifecycleScope.launch {
+            while (true) {
+                val inspirationalMessage: TextView =
+                    view.findViewById(R.id.hydration_message_text_view) as TextView
+                inspirationalMessage.text = getString(hydration_message_ids[count])
+                count++
+                if (count > 4)
+                    count = 0
+                delay(10000)
+            }
+        }
     }
 
     fun fillWaterBottle(view : View, percentage : Int) {

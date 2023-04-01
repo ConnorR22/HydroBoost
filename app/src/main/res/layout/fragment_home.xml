@@ -6,20 +6,29 @@
     tools:context=".ui.home.HomeFragment"
     android:background="@color/color1">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--    <com.example.hydroboost.ui.home.WaterFillingView-->
-<!--        android:id="@+id/waterFilling"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home Fragment" />
-    
-<!--    <ImageView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:src="@drawable/hydroboost_logo_background" />-->
+        android:id="@+id/hydration_message_text_view"
+        android:layout_width="391dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="525dp"
+        android:text=""
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed"/>
+
+    <Button
+        android:id="@+id/log_water_button"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="355dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:backgroundTint="@color/color6"
+        android:text="+"
+        android:textSize="36dp"
+        android:textColor="@color/color3"
+        android:padding="0dp" />
 
 </FrameLayout>
