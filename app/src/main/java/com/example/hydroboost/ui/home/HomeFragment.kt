@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
         view as ViewGroup
         waterBottleImage = ImageView(requireContext())
 
-        waterBottleImage.setImageResource(R.drawable.water_bottle)
+        waterBottleImage.setImageResource(R.drawable.water_bottle_with_background)
         val waterBottleImageParams = LinearLayout.LayoutParams(338, 1284)
         waterBottleImageParams.setMargins(371, 150, 0, 0)
         waterBottleImage.layoutParams = waterBottleImageParams
