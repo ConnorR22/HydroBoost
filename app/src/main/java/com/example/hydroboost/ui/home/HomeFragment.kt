@@ -1,5 +1,6 @@
 package com.example.hydroboost.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -64,6 +65,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view as ViewGroup
+
+        val sharedPreferences = activity?.getSharedPreferences(
+            getString(R.string.preference_file_key),
+            Context.MODE_PRIVATE
+        )
+        val sharedPreferencesEditor = sharedPreferences?.edit()
+        println(sharedPreferences?.all)
 
         lifecycleScope.launch {
             for (i in 1..9) {
