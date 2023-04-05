@@ -20,11 +20,6 @@ class WaterFillingView(context : Context, attrs: AttributeSet? = null, x : Int, 
         val paint : Paint = Paint()
         paint.color = Color.BLUE
 
-//        val rectangleWidth = rectangleWidth
-
-//        val rectangleWidth = 540
-//        val rectangleHeight = 960
-
         val waterRectangle = Rect(x, y, x + rectangleWidth, y + rectangleHeight)
         canvas.drawRect(waterRectangle, paint)
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import com.example.hydroboost.R
+import com.example.hydroboost.ui.SharedPreferences
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -66,20 +67,22 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view as ViewGroup
 
-        val sharedPreferences = activity?.getSharedPreferences(
-            getString(R.string.preference_file_key),
-            Context.MODE_PRIVATE
-        )
-        val sharedPreferencesEditor = sharedPreferences?.edit()
-        println(sharedPreferences?.all)
+//        val sharedPreferences = SharedPreferences(requireContext())
+//
+//        val sharedPreferences = activity?.getSharedPreferences(
+//            getString(R.string.preference_file_key),
+//            Context.MODE_PRIVATE
+//        )
+//        val sharedPreferencesEditor = sharedPreferences?.edit()
+//        println(sharedPreferences?.all)
 
-        lifecycleScope.launch {
-            for (i in 1..9) {
-                fillWaterBottle(view, i)
-                delay(1000)
-            }
-            removeWater(view)
-        }
+//        lifecycleScope.launch {
+//            for (i in 1..9) {
+//                fillWaterBottle(view, i)
+//                delay(1000)
+//            }
+//            removeWater(view)
+//        }
 
         val hydration_message_ids : Array<Int> = arrayOf(
             R.string.hydration_message_1,

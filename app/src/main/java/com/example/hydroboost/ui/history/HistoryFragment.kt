@@ -2,21 +2,17 @@ package com.example.hydroboost.ui.history
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat.getColor
 import androidx.core.content.ContextCompat
 import com.example.hydroboost.R
-import com.example.hydroboost.ui.home.HomeFragment
+import com.example.hydroboost.ui.SharedPreferences
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,7 +29,6 @@ class HistoryFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -57,19 +52,12 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view as ViewGroup
 
-        val sharedPreferences = activity?.getSharedPreferences(
-            getString(R.string.preference_file_key),
-            Context.MODE_PRIVATE
-        )
-        val sharedPreferencesEditor = sharedPreferences?.edit()
+        val sharedPreferences = SharedPreferences(requireContext())
 
-        val sharedPreferencesMap : Map<String, *> = sharedPreferences!!.all
-        val uniqueDates : MutableList<String> = mutableListOf<String>()
-
-        val sharedPreferencesList : List<Pair <String, *>> = sharedPreferencesMap.toList()
-        val sharedPreferencesListSorted = sharedPreferencesList.sortedByDescending { it.first }
-
+        val sharedPreferencesListSorted = sharedPreferences.getDescendingDates()
         val historyListLinearLayout = view?.findViewById<LinearLayout>(R.id.history_list)
+
+        val uniqueDates : MutableList<String> = mutableListOf<String>()
 
         for ((dateTime, amount) in sharedPreferencesListSorted) {
             if (dateTime == "WATER_GOAL")
@@ -77,46 +65,68 @@ class HistoryFragment : Fragment() {
 
             val date = dateTime.substring(0, 10)
             val time = dateTime.substring(11, 19)
+
             if (! uniqueDates.contains(date)) {
                 uniqueDates.add(date)
-
-                val dateHeader = TextView(requireContext())
-                dateHeader.text = date
-                dateHeader.textSize = 24F
+                val dateHeader = dateHeaderFun(date)
                 historyListLinearLayout?.addView(dateHeader)
             }
 
-            val waterLogButtonContainer = LinearLayout(requireContext())
-            waterLogButtonContainer.orientation = LinearLayout.HORIZONTAL
-            waterLogButtonContainer.id = (dateTime + "_container").hashCode()
-
-            val waterLogEntry = TextView(requireContext())
-            waterLogEntry.text = "$date $time: $amount" + "ml"
-            waterLogEntry.textSize = 16F
-
-            val removeLogButton = Button(requireContext())
-            removeLogButton.layoutParams = LinearLayout.LayoutParams(100, 100)
-            removeLogButton.text = "X"
-            removeLogButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.color3))
-            removeLogButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.color6))
-            removeLogButton.id = (dateTime + "_button").hashCode()
+            val waterLogButtonContainer = waterLogButtonContainerFun(dateTime)
+            val waterLogEntry = waterLogEntryFun(date, time, amount as Int)
+            val removeLogButton = removeLogButtonFun(dateTime)
 
             removeLogButton.setOnClickListener() {
-                sharedPreferencesEditor?.remove(dateTime)
-                sharedPreferencesEditor?.apply()
-
-                val manager = requireActivity().supportFragmentManager
-                val transaction = manager.beginTransaction()
-                transaction.replace(R.id.frameLayout, HistoryFragment())
-                transaction.commit()
+                sharedPreferences.remove(dateTime)
+                returnHistory()
             }
-
 
             waterLogButtonContainer?.addView(waterLogEntry)
             waterLogButtonContainer?.addView(removeLogButton)
-
             historyListLinearLayout?.addView(waterLogButtonContainer)
         }
+    }
+
+    private fun returnHistory() {
+        val manager = requireActivity().supportFragmentManager
+        val transaction = manager.beginTransaction()
+        transaction.replace(R.id.frameLayout, HistoryFragment())
+        transaction.commit()
+    }
+
+    private fun dateHeaderFun(date : String): TextView {
+        val dateHeader = TextView(requireContext())
+        dateHeader.text = date
+        dateHeader.textSize = 24F
+
+        return dateHeader
+    }
+
+    private fun removeLogButtonFun(dateTime : String): Button {
+        val removeLogButton = Button(requireContext())
+        removeLogButton.layoutParams = LinearLayout.LayoutParams(100, 100)
+        removeLogButton.text = "X"
+        removeLogButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.color3))
+        removeLogButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.color6))
+        removeLogButton.id = (dateTime + "_button").hashCode()
+
+        return removeLogButton
+    }
+
+    private fun waterLogEntryFun(date : String, time : String, amount : Int): TextView {
+        val waterLogEntry = TextView(requireContext())
+        waterLogEntry.text = "$date $time: $amount" + "ml"
+        waterLogEntry.textSize = 16F
+
+        return waterLogEntry
+    }
+
+    private fun waterLogButtonContainerFun(dateTime : String): LinearLayout {
+        val waterLogButtonContainer = LinearLayout(requireContext())
+        waterLogButtonContainer.orientation = LinearLayout.HORIZONTAL
+        waterLogButtonContainer.id = (dateTime + "_container").hashCode()
+
+        return waterLogButtonContainer
     }
 
     companion object {
