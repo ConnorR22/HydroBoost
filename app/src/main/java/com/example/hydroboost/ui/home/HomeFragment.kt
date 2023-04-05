@@ -28,6 +28,7 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var waterFillingView : View? = null
+    private var sharedPreferences : SharedPreferences? = null
     private lateinit var waterBottleImage : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +47,8 @@ class HomeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
         rootView as ViewGroup //This FrameLayout should be changed to a ViewGroup to avoid explicit casting
 
-        val maxHeight = 1434 //This represents the number of pixels from top of screen to bottom of water bottle
-//        addWater(rootView, 371, 150, 338, 1284) //Water same height as water bottle
-//        addWater(rootView, 371, 340, 338, 1094) //Water actual dimensions
-        addWater(rootView, 371, ((1434 * .9).toInt()), 338, ((1434 * .1).toInt()))
+        sharedPreferences = SharedPreferences(requireContext())
+
         addWaterBottle(rootView)
 
         val logWaterButton : Button = rootView.findViewById(R.id.log_water_button)
@@ -67,15 +66,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view as ViewGroup
 
-//        val sharedPreferences = SharedPreferences(requireContext())
-//
-//        val sharedPreferences = activity?.getSharedPreferences(
-//            getString(R.string.preference_file_key),
-//            Context.MODE_PRIVATE
-//        )
-//        val sharedPreferencesEditor = sharedPreferences?.edit()
-//        println(sharedPreferences?.all)
-
 //        lifecycleScope.launch {
 //            for (i in 1..9) {
 //                fillWaterBottle(view, i)
@@ -83,6 +73,8 @@ class HomeFragment : Fragment() {
 //            }
 //            removeWater(view)
 //        }
+
+        fillWaterBottle(view)
 
         val hydration_message_ids : Array<Int> = arrayOf(
             R.string.hydration_message_1,
@@ -105,13 +97,34 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun fillWaterBottle(view : View, percentage : Int) {
+    fun fillWaterBottle(view : View) {
         view as ViewGroup
+//        lifecycleScope.launch {
+//            for (i in 1..9) {
+//                fillWaterBottle(view, i)
+//                delay(1000)
+//            }
+//            removeWater(view)
+//        }
+        val percentage = sharedPreferences?.getPercentageOfGoalDrank() //percentage = 1: 1%, percentage = 100: 100%
 
-        view.removeView(waterFillingView) //Remove the water
-        view.removeView(waterBottleImage) //Remove the bottle
-        addWater(view, 371, ((1434.0 * (1.0 - (percentage / 10.0))).toInt()), 338, ((1434.0 * (percentage / 10.0)).toInt()))
-        addWaterBottle(view)
+        lifecycleScope.launch {
+            for (i in 1..percentage!!) {
+                view.removeView(waterFillingView) //Remove the water
+                view.removeView(waterBottleImage) //Remove the bottle
+
+                if (percentage != null)
+                    addWater(
+                        view,
+                        371,
+                        (1413 - (1068 * (i / 100.0))).toInt(),
+                        338,
+                        (1068 * (i / 100.0)).toInt()
+                    )
+                addWaterBottle(view)
+                delay(15)
+            }
+        }
     }
 
     fun addWaterBottle(view : View) {

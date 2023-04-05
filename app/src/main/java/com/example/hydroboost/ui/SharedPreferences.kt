@@ -18,6 +18,17 @@ class SharedPreferences(context : Context, attrs: AttributeSet? = null) {
         return sharedPreferences.all
     }
 
+    public fun getAllWaterLogs(): MutableMap<String, *> {
+        val temp = getAll()
+        temp.remove("WATER_GOAL")
+        return temp
+    }
+
+    public fun getWaterGoal(): Int {
+        //This returns 0 if "WATER_GOAL" has been accidentally removed
+        return sharedPreferences.getInt("WATER_GOAL", 0)
+    }
+
     public fun getDescendingDates(): List<Pair<String, *>> {
         val sharedPreferencesList : List<Pair <String, *>> = getAll().toList()
         return sharedPreferencesList.sortedByDescending { it.first }
@@ -37,5 +48,38 @@ class SharedPreferences(context : Context, attrs: AttributeSet? = null) {
         val calendar = Calendar.getInstance()
         val dateTime = calendar.time
         return dateTimeFormatter.format(dateTime)
+    }
+
+    public fun getWaterLogsToday(): MutableMap<String, *> {
+        val currentDate = getCurrentDateTime().substring(0, 10)
+        val allWaterLogs = getAllWaterLogs()
+
+        val todayWaterLogs : MutableMap<String, Any?> = mutableMapOf()
+        for ((dateTime, value) in allWaterLogs)
+            if (dateTime.substring(0, 10) == currentDate)
+                todayWaterLogs[dateTime] = value
+
+        return todayWaterLogs
+    }
+
+    public fun getWaterDrankToday(): Int {
+        val waterLogsToday = getWaterLogsToday()
+        var amount : Int = 0
+
+        for ((dateTime, value) in waterLogsToday)
+            amount = amount + value as Int ?: 0
+
+        return amount
+    }
+
+    public fun getPercentageOfGoalDrank(): Int {
+        val waterDrankToday = getWaterDrankToday()
+        val waterGoal = getWaterGoal()
+        val percentage = ((waterDrankToday.toFloat() / waterGoal.toFloat()) * 100).toInt()
+
+        if (percentage > 100)
+            return 100
+
+        return percentage
     }
 }
