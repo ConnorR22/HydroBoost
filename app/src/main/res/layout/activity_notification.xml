@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:layout_marginBottom="8dp"
-        android:text="Quiet Delivery"
+        android:text="Notification Delivery Sound"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view4"
