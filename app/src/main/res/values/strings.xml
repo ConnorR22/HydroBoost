@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Hydroboost</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="intervals">
+        <item>Every 30 Minutes</item>
+        <item>Every Hour</item>
+        <item>Every 2 Hours</item>
+    </string-array>
 </resources>

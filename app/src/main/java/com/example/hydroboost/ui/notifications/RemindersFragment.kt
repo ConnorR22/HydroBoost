@@ -1,10 +1,16 @@
 package com.example.hydroboost.ui.notifications
 
+import android.app.Dialog
+import android.app.TimePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import com.example.hydroboost.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -14,10 +20,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NotificationsFragment.newInstance] factory method to
+ * Use the [RemindersFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NotificationsFragment : Fragment() {
+class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -28,6 +34,7 @@ class NotificationsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
@@ -35,7 +42,23 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false)
+
+        val intervals = resources.getStringArray(R.array.intervals)
+        val t=inflater.inflate(R.layout.fragment_reminders, container, false)
+        val spinner = t.findViewById<Spinner>(R.id.intervalSelect)
+        spinner?.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.spinner_item, intervals) } as SpinnerAdapter
+        spinner?.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                println("erreur")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val type = parent?.getItemAtPosition(position).toString()
+            }
+
+        }
+
+        return t
     }
 
     companion object {
@@ -50,11 +73,21 @@ class NotificationsFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            NotificationsFragment().apply {
+            RemindersFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
     }
+
+    override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
+        TODO("Not yet implemented")
+    }
+
+//    fun showTimePickerDialog(view: View) {
+//        RemindersFragment().show(supp, "timePicker")
+//    }
+
+
 }
