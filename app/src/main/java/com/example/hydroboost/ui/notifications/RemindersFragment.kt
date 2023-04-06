@@ -1,10 +1,8 @@
 package com.example.hydroboost.ui.notifications
 
-import android.app.Dialog
 import android.app.TimePickerDialog
-import android.icu.util.Calendar
+import android.content.Context
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +10,7 @@ import android.widget.*
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.hydroboost.R
+import com.example.hydroboost.ui.SharedPreferences
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +26,9 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+//    var preferences: android.content.SharedPreferences? = this.activity!!
+//        .getSharedPreferences("pref", Context.MODE_PRIVATE)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
