@@ -87,6 +87,10 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
         TODO("Not yet implemented")
     }
 
+//    fun saveReminder(view: View) {
+//        return
+//    }
+
 //    fun showTimePickerDialog(view: View) {
 //        RemindersFragment().show(supp, "timePicker")
 //    }
