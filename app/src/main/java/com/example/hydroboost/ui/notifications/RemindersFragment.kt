@@ -2,6 +2,7 @@ package com.example.hydroboost.ui.notifications
 
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +27,11 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var sharedPreferences: SharedPreferences? = null
-//    var preferences: android.content.SharedPreferences? = this.activity!!
-//        .getSharedPreferences("pref", Context.MODE_PRIVATE)
 
+    private var style: String? = null
+    private var startTime: String? = null
+    private var endTime: String? = null
+    private var sharedPreferences: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,8 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        sharedPreferences = SharedPreferences(requireContext())
 
         val intervals = resources.getStringArray(R.array.intervals)
         val t=inflater.inflate(R.layout.fragment_reminders, container, false)
@@ -84,17 +88,22 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             }
     }
 
+
+    fun saveReminder(view: View) {
+        view as ViewGroup
+        super.onResume()
+        
+        val settings = sharedPreferences?.getReminderSettings()
+
+        // write all the data entered by the user in SharedPreference and apply
+//        settings.putString("style", style)
+//        settings.putString("startTime", startTime)
+//        settings.putString("endTime", endTime)
+//        settings.apply()
+    }
+
     override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
         TODO("Not yet implemented")
     }
-
-//    fun saveReminder(view: View) {
-//        return
-//    }
-
-//    fun showTimePickerDialog(view: View) {
-//        RemindersFragment().show(supp, "timePicker")
-//    }
-
 
 }
