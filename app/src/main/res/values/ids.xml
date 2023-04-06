@@ -7,4 +7,6 @@ Date: 2023/04/09
 
 <resources>
     <item type = "id" name = "waterBottleImage" />
+    <item name="backButton" type="id" />
+    <item name="messageTitle" type="id" />
 </resources>
