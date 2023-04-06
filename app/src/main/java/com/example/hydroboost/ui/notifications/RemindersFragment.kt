@@ -26,6 +26,7 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var sharedPreferences: SharedPreferences? = null
 //    var preferences: android.content.SharedPreferences? = this.activity!!
 //        .getSharedPreferences("pref", Context.MODE_PRIVATE)
 
