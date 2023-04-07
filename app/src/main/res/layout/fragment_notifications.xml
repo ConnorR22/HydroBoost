@@ -3,21 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.NotificationsFragment">
-
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="65dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/baseline_arrow_back_24" />
+    tools:context=".ui.notifications.NotificationsFragment"
+    android:background="@color/color1">
 
     <TextView
         android:id="@+id/notificationTitle"
         android:layout_width="198dp"
         android:layout_height="34dp"
-        android:layout_marginStart="125dp"
+        android:layout_marginStart="105dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="93dp"
         android:text="Notification Settings"
@@ -136,8 +129,8 @@
         android:layout_marginStart="165dp"
         android:layout_marginTop="520dp"
         android:layout_marginEnd="93dp"
-        android:text="Save" />
-
-
+        android:text="Save"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"/>
 
 </FrameLayout>

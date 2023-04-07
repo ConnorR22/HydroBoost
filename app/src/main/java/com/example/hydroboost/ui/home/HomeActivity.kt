@@ -1,45 +1,52 @@
 package com.example.hydroboost.ui.home
 
-import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import androidx.fragment.app.Fragment
 import com.example.hydroboost.R
+import com.example.hydroboost.databinding.ActivityHomeBinding
+import com.example.hydroboost.ui.history.HistoryFragment
+import com.example.hydroboost.ui.metrics.MetricsFragment
+import com.example.hydroboost.ui.notifications.NotificationsFragment
 
 class HomeActivity : AppCompatActivity() {
     private val CHANNEL_ID = "notification_channel"
+
+    private lateinit var homeBinding : ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
 
         createNotificationChannel()
 
-        // TODO must DELETE when navigation bar is fully implemented
-        val temp = findViewById<Button>(R.id.button)
-        temp.setText("Notification Settings")
-        temp.setOnClickListener {
-            val i = Intent(this@HomeActivity, NotificationActivity::class.java)
-            startActivity(i)
+        homeBinding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(homeBinding.root)
+
+        homeBinding.navBar.setOnItemSelectedListener {
+            var item = it.itemId
+
+            if (item == R.id.homeIcon)
+                updateFrameLayoutFromNavBar(HomeFragment())
+            else if (item == R.id.notificationsIcon)
+                updateFrameLayoutFromNavBar(NotificationsFragment())
+            else if (item == R.id.metricsIcon)
+                updateFrameLayoutFromNavBar(MetricsFragment())
+            else if (item == R.id.historyIcon)
+                updateFrameLayoutFromNavBar(HistoryFragment())
+
+            true
         }
 
-        // TODO must DELETE when custom reminders are fully implemented
-        val temp2 = findViewById<Button>(R.id.button2)
-        temp2.setText("Send Notification")
-        temp2.setOnClickListener {
+        updateFrameLayoutFromNavBar(HomeFragment())
+    }
 
-            val intent = Intent(applicationContext, NotificationBroadcast::class.java)
-            val pendingIntent: PendingIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-
-            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent)
-        }
-
+    private fun updateFrameLayoutFromNavBar(fragment : Fragment) {
+        val manager = supportFragmentManager
+        val transaction = manager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragment)
+        transaction.commit()
     }
 
     fun createNotificationChannel() {

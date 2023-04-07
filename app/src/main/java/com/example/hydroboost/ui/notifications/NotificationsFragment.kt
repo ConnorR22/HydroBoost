@@ -1,4 +1,4 @@
-package com.example.hydroboost.ui.home
+package com.example.hydroboost.ui.notifications
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,9 +14,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.hydroboost.R
+import com.example.hydroboost.ui.home.HomeActivity
 import com.google.android.material.snackbar.Snackbar
 
 // TODO: Rename parameter arguments, choose names that match
@@ -79,7 +81,6 @@ class NotificationsFragment : Fragment() {
 
         val preferences = this.context?.getSharedPreferences("NOTIFICATIONS", Context.MODE_PRIVATE)
 
-        val backButton = view.findViewById<Button>(R.id.backButton)
         val saveButton = view.findViewById<Button>(R.id.saveNotifications)
         val messageEdit = view.findViewById<TextView>(R.id.messageEdit)
         val deliverySwitch = view.findViewById<Switch>(R.id.deliverySwitch)
@@ -94,23 +95,22 @@ class NotificationsFragment : Fragment() {
         requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             // "it" refers to whether the notification permissions were enabled - let the user know the status upon making their choice
             if (!it) {
-                Snackbar.make(
-                    view.findViewById<View>(android.R.id.content).rootView,
-                    "Please permit notifications in the App Settings",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                view.findViewById<View>(android.R.id.content)?.rootView?.let { it1 ->
+                    Snackbar.make(
+                        it1,
+                        "Please permit notifications in the App Settings",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
             } else {
-                Snackbar.make(
-                    view.findViewById<View>(android.R.id.content).rootView,
-                    "Notifications are now enabled!",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                view.findViewById<View>(android.R.id.content)?.rootView?.let { it1 ->
+                    Snackbar.make(
+                        it1,
+                        "Notifications are now enabled!",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
             }
-        }
-
-        backButton.setOnClickListener {
-            val i = Intent(context, HomeActivity::class.java)
-            startActivity(i)
         }
 
         saveButton.setOnClickListener {

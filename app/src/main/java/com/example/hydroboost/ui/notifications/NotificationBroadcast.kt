@@ -1,4 +1,4 @@
-package com.example.hydroboost.ui.home
+package com.example.hydroboost.ui.notifications
 
 import android.Manifest
 import android.app.PendingIntent
@@ -10,8 +10,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.hydroboost.R
+import com.example.hydroboost.ui.home.HomeActivity
 import java.util.*
-import kotlin.random.Random
 
 /**
  * @author Emily Tan

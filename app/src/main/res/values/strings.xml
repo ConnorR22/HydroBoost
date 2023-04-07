@@ -2,4 +2,22 @@
     <string name="app_name">Hydroboost</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="preference_file_key">com.example.hydroboost.WATER_LOGGING_KEY</string>
+    <string name="date_time_format">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</string>
+    <!--
+    Referenced from: medicalnewstoday.com
+    URL: https://www.medicalnewstoday.com/articles/290814
+    Date Accessed: 2023/03/31 -->
+    <string name="hydration_message_1">Blood is more than 90 percent water, and blood carries oxygen
+        to different parts of the body.</string>
+    <string name="hydration_message_2">With dehydration, the skin can become more vulnerable to skin
+        disorders and premature wrinkling.</string>
+    <string name="hydration_message_3">Water is needed in the processes of sweating and removal of
+        urine and feces.</string>
+    <string name="hydration_message_4">A lack of water can cause blood to become thicker, increasing
+        blood pressure.</string>
+    <string name="hydration_message_5">Minerals and nutrients dissolve in water, which makes it
+        possible for them to reach different parts of the body.</string>
+
 </resources>
