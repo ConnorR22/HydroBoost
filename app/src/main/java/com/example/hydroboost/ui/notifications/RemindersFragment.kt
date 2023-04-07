@@ -2,7 +2,6 @@ package com.example.hydroboost.ui.notifications
 
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,12 +59,59 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val type = parent?.getItemAtPosition(position).toString()
+                style = parent?.getItemAtPosition(position).toString()
             }
 
         }
 
+        val tpStart = t.findViewById<TimePicker>(R.id.startTimePicker)
+        val tpEnd = t.findViewById<TimePicker>(R.id.endTimePicker)
+        val button = t.findViewById<Button>(R.id.saveSettings)
+
+        button.setOnClickListener {
+            startTime = "" + tpStart.hour + ":" + tpStart.minute
+            endTime = "" + tpEnd.hour + ":" + tpEnd.minute
+            saveReminder()
+        }
+
+        // Load saved setting values
+        loadSettings(spinner, tpStart, tpEnd)
+
         return t
+    }
+
+    private fun loadSettings(spinner: Spinner, tpStart: TimePicker, tpEnd: TimePicker) {
+
+        val sharedPreferencesSettings = context?.getSharedPreferences(
+            context!!.getString(R.string.reminder_settings),
+            Context.MODE_PRIVATE
+        )
+
+        if (sharedPreferencesSettings != null) {
+            style = sharedPreferencesSettings.getString("style", "")
+            when (style) {
+                "Every 30 Minutes" -> spinner.setSelection(0)
+                "Every Hour" -> spinner.setSelection(1)
+                "Every 2 Hours" -> spinner.setSelection(2)
+            }
+        }
+        if (sharedPreferencesSettings != null) {
+            startTime = sharedPreferencesSettings.getString("startTime", "")
+            val times = startTime?.split(":")
+            if (times != null) {
+                tpStart.hour = times.elementAt(0).toInt()
+                tpStart.minute = times.elementAt(1).toInt()
+            }
+
+        }
+        if (sharedPreferencesSettings != null) {
+            endTime = sharedPreferencesSettings.getString("endTime", "")
+            val times = endTime?.split(":")
+            if (times != null) {
+                tpEnd.hour = times.elementAt(0).toInt()
+                tpEnd.minute = times.elementAt(1).toInt()
+            }
+        }
     }
 
     companion object {
@@ -89,17 +135,30 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
     }
 
 
-    fun saveReminder(view: View) {
-        view as ViewGroup
-        super.onResume()
-        
-        val settings = sharedPreferences?.getReminderSettings()
+    private fun saveReminder() {
+
+        val sharedPreferencesSettings = context?.getSharedPreferences(
+            context!!.getString(R.string.reminder_settings),
+            Context.MODE_PRIVATE
+        )
+        val sharedPreferencesEditor = sharedPreferencesSettings?.edit()
 
         // write all the data entered by the user in SharedPreference and apply
-//        settings.putString("style", style)
-//        settings.putString("startTime", startTime)
-//        settings.putString("endTime", endTime)
-//        settings.apply()
+        if (sharedPreferencesEditor != null) {
+            sharedPreferencesEditor.putString("style", style)
+            println("style changed " + style)
+        }
+        if (sharedPreferencesEditor != null) {
+            sharedPreferencesEditor.putString("startTime", startTime)
+            println("startTime changed " + startTime)
+        }
+        if (sharedPreferencesEditor != null) {
+            sharedPreferencesEditor.putString("endTime", endTime)
+            println("endTime changed " + endTime)
+        }
+        if (sharedPreferencesEditor != null) {
+            sharedPreferencesEditor.apply()
+        }
     }
 
     override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
