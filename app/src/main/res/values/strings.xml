@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Hydroboost</string>
 
-    <string name="preference_file_key">com.example.hydroboost.REMINDER_SETTINGS</string>
+    <string name="reminder_settings">com.example.hydroboost.REMINDER_SETTINGS</string>
     <string name="date_time_format">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</string>
 
     <string-array name="intervals">
