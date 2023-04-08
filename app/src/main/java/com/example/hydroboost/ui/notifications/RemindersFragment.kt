@@ -98,7 +98,8 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
         if (sharedPreferencesSettings != null) {
             startTime = sharedPreferencesSettings.getString("startTime", "")
             val times = startTime?.split(":")
-            if (times != null) {
+
+            if (startTime != "" && times != null) {
                 tpStart.hour = times.elementAt(0).toInt()
                 tpStart.minute = times.elementAt(1).toInt()
             }
@@ -107,7 +108,7 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
         if (sharedPreferencesSettings != null) {
             endTime = sharedPreferencesSettings.getString("endTime", "")
             val times = endTime?.split(":")
-            if (times != null) {
+            if (endTime != "" && times != null) {
                 tpEnd.hour = times.elementAt(0).toInt()
                 tpEnd.minute = times.elementAt(1).toInt()
             }

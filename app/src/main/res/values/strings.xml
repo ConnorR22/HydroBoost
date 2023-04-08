@@ -33,4 +33,6 @@ Date: 2023/04/09
         <item>Every Hour</item>
         <item>Every 2 Hours</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
