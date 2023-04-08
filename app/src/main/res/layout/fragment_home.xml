@@ -18,6 +18,19 @@
         android:textColor="@color/black"
         android:fontFamily="sans-serif-condensed"/>
 
+    <TextView
+        android:id="@+id/daily_goal_percentage"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="200dp"
+        android:text="0%"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="36dp"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed"/>
+
     <Button
         android:id="@+id/log_water_button"
         android:layout_width="50dp"

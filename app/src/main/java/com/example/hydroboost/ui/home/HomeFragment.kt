@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
     private var waterFillingView : View? = null
     private var sharedPreferences : SharedPreferences? = null
+    private var dailyGoalPercentageView : View? = null
     private lateinit var waterBottleImage : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -148,11 +149,23 @@ class HomeFragment : Fragment() {
         rootView as ViewGroup
         waterFillingView = WaterFillingView(requireContext(), null, x, y, rectangleWidth, rectangleHeight)
         rootView.addView(waterFillingView)
+        displayDailyGoalPercentage(rootView)
     }
 
     fun removeWater(view : View) {
         view as ViewGroup
         view.removeView(waterFillingView)
+    }
+
+    fun displayDailyGoalPercentage(view : View) {
+        view as ViewGroup
+        val dailyGoalPercentageView : TextView = view?.findViewById(R.id.daily_goal_percentage) as TextView
+        view.removeView(dailyGoalPercentageView)
+
+        val percentage = sharedPreferences?.getPercentageOfGoalDrank().toString() + "%"
+        dailyGoalPercentageView.text = percentage
+
+        view.addView(dailyGoalPercentageView)
     }
 
     companion object {
