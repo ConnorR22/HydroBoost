@@ -132,7 +132,14 @@ class HomeFragment : Fragment() {
         view as ViewGroup
         waterBottleImage = ImageView(requireContext())
 
-        waterBottleImage.setImageResource(R.drawable.water_bottle_with_background)
+        val percentage = sharedPreferences?.getPercentageOfGoalDrank()
+        if (percentage == 100) {
+            waterBottleImage.setImageResource(R.drawable.golden_water_bottle_with_background)
+            val dailyGoalPercentageView : TextView = view?.findViewById(R.id.daily_goal_percentage) as TextView
+            dailyGoalPercentageView.setTextColor(requireContext().getColor(R.color.color7))
+        } else
+            waterBottleImage.setImageResource(R.drawable.water_bottle_with_background)
+
         val waterBottleImageParams = LinearLayout.LayoutParams(338, 1284)
         waterBottleImageParams.setMargins(371, 150, 0, 0)
         waterBottleImage.layoutParams = waterBottleImageParams
