@@ -61,7 +61,6 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 style = parent?.getItemAtPosition(position).toString()
             }
-
         }
 
         val tpStart = t.findViewById<TimePicker>(R.id.startTimePicker)
@@ -141,7 +140,6 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
                 }
             }
     }
-
 
     private fun saveReminder() {
 
