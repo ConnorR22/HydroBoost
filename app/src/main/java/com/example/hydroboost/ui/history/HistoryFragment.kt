@@ -3,6 +3,7 @@ package com.example.hydroboost.ui.history
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -104,7 +105,9 @@ class HistoryFragment : Fragment() {
 
     private fun removeLogButtonFun(dateTime : String): Button {
         val removeLogButton = Button(requireContext())
-        removeLogButton.layoutParams = LinearLayout.LayoutParams(100, 100)
+        val layoutParams = LinearLayout.LayoutParams(100, 100, 0f)
+        removeLogButton.layoutParams = layoutParams
+
         removeLogButton.text = "X"
         removeLogButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.color3))
         removeLogButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.color6))
@@ -115,6 +118,9 @@ class HistoryFragment : Fragment() {
 
     private fun waterLogEntryFun(date : String, time : String, amount : Int): TextView {
         val waterLogEntry = TextView(requireContext())
+        val layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        waterLogEntry.layoutParams = layoutParams
+
         waterLogEntry.text = "$date $time: $amount" + "ml"
         waterLogEntry.textSize = 16F
 
@@ -124,6 +130,8 @@ class HistoryFragment : Fragment() {
     private fun waterLogButtonContainerFun(dateTime : String): LinearLayout {
         val waterLogButtonContainer = LinearLayout(requireContext())
         waterLogButtonContainer.orientation = LinearLayout.HORIZONTAL
+        waterLogButtonContainer.gravity = Gravity.HORIZONTAL_GRAVITY_MASK
+
         waterLogButtonContainer.id = (dateTime + "_container").hashCode()
 
         return waterLogButtonContainer
