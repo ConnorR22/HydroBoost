@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Hydroboost</string>
-
+    <string name="custom_reminders_settings">com.example.hydroboost.CUSTOM_REMINDERS_SETTINGS</string>
     <string name="reminder_settings">com.example.hydroboost.REMINDER_SETTINGS</string>
     <string name="date_time_format">yyyy-MM-dd\'T\'HH:mm:ss\'Z\'</string>
 
@@ -9,6 +9,18 @@
         <item>Every Hour</item>
         <item>Every 2 Hours</item>
     </string-array>
+
+    <string-array name="daysOfTheWeek">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

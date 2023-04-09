@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/messageTitle" />
 
     <EditText
-        android:id="@+id/notificationMessage"
+        android:id="@+id/customTitle"
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:layout_marginLeft="50dp"
