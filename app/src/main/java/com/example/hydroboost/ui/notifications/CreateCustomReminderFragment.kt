@@ -10,6 +10,7 @@ import android.widget.*
 import com.example.hydroboost.R
 import com.example.hydroboost.ui.ModelPreferences
 import com.example.hydroboost.ui.SharedPreferences
+import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,7 +92,7 @@ class CreateCustomReminderFragment : Fragment() {
         val addButton = t.findViewById<Button>(R.id.saveReminder)
 
         addButton.setOnClickListener {
-            title = titleText.toString()
+            title = titleText.text.toString()
             startTime = "" + tpStart.hour + ":" + tpStart.minute
             endTime = "" + tpEnd.hour + ":" + tpEnd.minute
             saveReminder()
@@ -108,14 +109,30 @@ class CreateCustomReminderFragment : Fragment() {
 
         ModelPreferences.with(this)
         data class CustomReminder(val title: String, val style: String, val startTime: String, val endTime: String, val day: String)
-        val customReminders: List<CustomReminder>? = null
+        val customReminders = arrayListOf<CustomReminder>()
+
+        val customReminderPreferences = context?.getSharedPreferences(
+            context!!.getString(R.string.custom_reminders_settings),
+            Context.MODE_PRIVATE
+        )
+        val crEditPrefs = customReminderPreferences?.edit()
 
         val cr = CustomReminder(title!!, style!!, startTime!!, endTime!!, day!!)
 
+        customReminders.add(cr)
+
+//        if (customReminderPreferences != null) {
+//            customReminders = customReminderPreferences.getString("CustomReminders", "")
+//        }
+
         println("Saved Custom Reminder: \n" + cr)
 
-        ModelPreferences.put(cr, "CUSTOM_REMINDERS")
+//        val jsonList = JSONArray(customReminders)
+        println(customReminders.toString())
 
+        val mySet = customReminders.toSet()
+
+        ModelPreferences.put(customReminders, "CUSTOM_REMINDERS")
     }
 
     fun getSharedPreferences(preferencesFileName: String, modePrivate: Int): SharedPreferences {

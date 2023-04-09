@@ -100,23 +100,20 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
                 "Every Hour" -> spinner.setSelection(1)
                 "Every 2 Hours" -> spinner.setSelection(2)
             }
-        }
-        if (sharedPreferencesSettings != null) {
-            startTime = sharedPreferencesSettings.getString("startTime", "")
-            val times = startTime?.split(":")
 
-            if (startTime != "" && times != null) {
-                tpStart.hour = times.elementAt(0).toInt()
-                tpStart.minute = times.elementAt(1).toInt()
+            startTime = sharedPreferencesSettings.getString("startTime", "")
+            val times1 = startTime?.split(":")
+
+            if (startTime != "" && times1 != null) {
+                tpStart.hour = times1.elementAt(0).toInt()
+                tpStart.minute = times1.elementAt(1).toInt()
             }
 
-        }
-        if (sharedPreferencesSettings != null) {
             endTime = sharedPreferencesSettings.getString("endTime", "")
-            val times = endTime?.split(":")
-            if (endTime != "" && times != null) {
-                tpEnd.hour = times.elementAt(0).toInt()
-                tpEnd.minute = times.elementAt(1).toInt()
+            val times2 = endTime?.split(":")
+            if (endTime != "" && times2 != null) {
+                tpEnd.hour = times2.elementAt(0).toInt()
+                tpEnd.minute = times2.elementAt(1).toInt()
             }
         }
     }
@@ -152,17 +149,8 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
         // write all the data entered by the user in SharedPreference and apply
         if (sharedPreferencesEditor != null) {
             sharedPreferencesEditor.putString("style", style)
-            println("style changed " + style)
-        }
-        if (sharedPreferencesEditor != null) {
             sharedPreferencesEditor.putString("startTime", startTime)
-            println("startTime changed " + startTime)
-        }
-        if (sharedPreferencesEditor != null) {
             sharedPreferencesEditor.putString("endTime", endTime)
-            println("endTime changed " + endTime)
-        }
-        if (sharedPreferencesEditor != null) {
             sharedPreferencesEditor.apply()
         }
     }

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.hydroboost.ui.notifications.CreateCustomReminderFragment
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 object ModelPreferences {
@@ -20,9 +21,15 @@ object ModelPreferences {
 
     fun <T> put(`object`: T, key: String) {
         //Convert object to JSON String.
+        val gson = Gson()
+//        val json = preferences.getString(PREFERENCES_FILE_NAME, null)
+
         val jsonString = GsonBuilder().create().toJson(`object`)
+
+        println(jsonString)
+
         //Save that String in SharedPreferences
-        preferences.edit().putString(key, jsonString).apply()
+//        preferences.edit().putString(key, jsonString).apply()
     }
 
     /**
