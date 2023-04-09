@@ -74,6 +74,13 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             saveReminder()
         }
 
+        val addButton = t.findViewById<ImageButton>(R.id.customReminderNav)
+        addButton.setOnClickListener {
+            val fragment = CustomReminderFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayout,fragment)?.commit()
+        }
+
         // Load saved setting values
         loadSettings(spinner, tpStart, tpEnd)
 
