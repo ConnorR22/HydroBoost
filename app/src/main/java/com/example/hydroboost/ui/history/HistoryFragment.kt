@@ -2,6 +2,7 @@ package com.example.hydroboost.ui.history
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -71,6 +72,9 @@ class HistoryFragment : Fragment() {
                 uniqueDates.add(date)
                 val dateHeader = dateHeaderFun(date)
                 historyListLinearLayout?.addView(dateHeader)
+
+                val headerLine = headerLineFun()
+                historyListLinearLayout?.addView(headerLine)
             }
 
             val waterLogButtonContainer = waterLogButtonContainerFun(dateTime)
@@ -97,15 +101,34 @@ class HistoryFragment : Fragment() {
 
     private fun dateHeaderFun(date : String): TextView {
         val dateHeader = TextView(requireContext())
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+        layoutParams.setMargins(25, 25,0, 0)
+        dateHeader.layoutParams = layoutParams
+
         dateHeader.text = date
-        dateHeader.textSize = 24F
+        dateHeader.textSize = 28F
+        dateHeader.setTextColor(requireContext().getColor(R.color.black))
+
+        val typeface = Typeface.create("sans-serif-condensed", Typeface.BOLD)
+        dateHeader.typeface = typeface
 
         return dateHeader
     }
 
+    private fun headerLineFun() : View {
+        val headerLine = View(requireContext())
+        val layoutParams = LinearLayout.LayoutParams(1060, 6)
+        layoutParams.setMargins(10, 0, 0, 0)
+        headerLine.layoutParams = layoutParams
+
+        headerLine.setBackgroundColor(requireContext().getColor(R.color.black))
+
+        return headerLine
+    }
+
     private fun removeLogButtonFun(dateTime : String): Button {
         val removeLogButton = Button(requireContext())
-        val layoutParams = LinearLayout.LayoutParams(100, 100, 0f)
+        val layoutParams = LinearLayout.LayoutParams(110, 110, 0f)
         removeLogButton.layoutParams = layoutParams
 
         removeLogButton.text = "X"
@@ -119,10 +142,15 @@ class HistoryFragment : Fragment() {
     private fun waterLogEntryFun(date : String, time : String, amount : Int): TextView {
         val waterLogEntry = TextView(requireContext())
         val layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        layoutParams.setMargins(10, 0, 0, 0)
         waterLogEntry.layoutParams = layoutParams
 
         waterLogEntry.text = "$date $time: $amount" + "ml"
-        waterLogEntry.textSize = 16F
+        waterLogEntry.textSize = 20F
+        waterLogEntry.setTextColor(requireContext().getColor(R.color.black))
+
+        val typeface = Typeface.create("sans-serif-condensed", Typeface.NORMAL)
+        waterLogEntry.typeface = typeface
 
         return waterLogEntry
     }
