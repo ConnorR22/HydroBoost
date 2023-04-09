@@ -1,5 +1,15 @@
 package com.example.hydroboost.ui.home
 
+/**
+ * A fragment representing the home screen of HydroBoost.
+ * Displays a water bottle animation representing daily water intake.
+ * Also displays hydration facts, and a link to the LogWaterFragment to log water entries
+ * and set daily water goal.
+ * @author: Ben Hickman
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment

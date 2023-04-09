@@ -1,5 +1,12 @@
 package com.example.hydroboost.ui.home
 
+/**
+ * An activity that displays the loading screen, and transitions to the HomeFragment.
+ * @author: Ben Hickman
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

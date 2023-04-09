@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+XML layout for the HomeActivity.
+Author: Ben Hickman
+Date: 2023/04/09
+-->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,10 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/navBar">
-
     </FrameLayout>
-    <!-- Try changing width in layout_width="match_parent" -->
-    <!--        android:background="#001220"-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -27,6 +31,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-    <!--app:itemIconTint="#ABDBE3"
-    app:itemIconSize="36dp"-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

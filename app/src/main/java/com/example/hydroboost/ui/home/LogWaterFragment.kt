@@ -1,5 +1,13 @@
 package com.example.hydroboost.ui.home
 
+/**
+ * A fragment used to log water consumption instances, and set daily intake goal.
+ * These values are saved to the device locally.
+ * @author: Ben Hickman
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment

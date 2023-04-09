@@ -1,5 +1,12 @@
 package com.example.hydroboost.ui
 
+/**
+ * A Kotlin class used to access local device SharedPreferences.
+ * @author: Ben Hickman
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.content.Context
 import android.util.AttributeSet
 import com.example.hydroboost.R

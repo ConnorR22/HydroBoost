@@ -1,5 +1,13 @@
 package com.example.hydroboost.ui.history
 
+/**
+ * A fragment representing water log history.
+ * Water logs are grouped together by date, can be removed from this fragment.
+ * @author: Ben Hickman
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
@@ -92,6 +100,9 @@ class HistoryFragment : Fragment() {
         }
     }
 
+    /**
+     *
+     */
     private fun returnHistory() {
         val manager = requireActivity().supportFragmentManager
         val transaction = manager.beginTransaction()

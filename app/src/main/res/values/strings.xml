@@ -1,3 +1,9 @@
+<!--
+XML layout for strings used within the app.
+Author: Ben Hickman
+Date: 2023/04/09
+-->
+
 <resources>
     <string name="app_name">Hydroboost</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -1,5 +1,13 @@
 package com.example.hydroboost.ui.home
 
+/**
+ * A Kotlin class representing the logic to fill a water bottle.
+ * Draws a blue rectangle onto the canvas.
+ * @author: Ben Hickman
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.view.View
 import android.util.AttributeSet
 import android.content.Context

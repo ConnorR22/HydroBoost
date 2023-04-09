@@ -1,4 +1,9 @@
-<vector android:height="36dp" android:tint="#ABDBE3"
+<!--
+An icon used for the MetricsFragment tab on the navigation bar.
+Author: Ben Hickman
+Date: 2023/04/09
+-->
+<vector android:height="36dp" android:tint="@color/color1"
     android:viewportHeight="24" android:viewportWidth="24"
     android:width="36dp" xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="@android:color/white" android:pathData="M4,9h4v11h-4z"/>
