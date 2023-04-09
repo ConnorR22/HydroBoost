@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide() //Remove the action bar for loading screen
 
+        //Define the loading screen
         Handler(Looper.getMainLooper()).postDelayed({
             val switchToHome = Intent(this@MainActivity, HomeActivity::class.java)
             startActivity(switchToHome)

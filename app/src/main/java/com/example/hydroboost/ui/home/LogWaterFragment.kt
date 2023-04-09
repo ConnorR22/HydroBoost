@@ -8,7 +8,6 @@ package com.example.hydroboost.ui.home
  * @version: 1.0.0
  */
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,29 +16,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import com.example.hydroboost.R
-import com.example.hydroboost.ui.SharedPreferences
+import com.example.hydroboost.data.SharedPreferences
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LogWaterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LogWaterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -49,8 +30,10 @@ class LogWaterFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_log_water, container, false)
         view as ViewGroup
 
+        //Create SharedPreferences object
         val sharedPreferences = SharedPreferences(requireContext())
 
+        //Define events for saving and cancelling
         saveLogWaterEvent(view, sharedPreferences)
         cancelLogWaterEvent(view)
         saveWaterGoalEvent(view, sharedPreferences)
@@ -60,6 +43,11 @@ class LogWaterFragment : Fragment() {
         return view
     }
 
+    /**
+     * A function used to handle a user saving a water log entry.
+     * @param view: The current view
+     * @param sharedPreferences: The SharedPreferences object.
+     */
     private fun saveLogWaterEvent(view : View, sharedPreferences : SharedPreferences) {
         val saveLogWaterButton : Button = view.findViewById(R.id.save_log_water_button)
         saveLogWaterButton.setOnClickListener {
@@ -67,7 +55,7 @@ class LogWaterFragment : Fragment() {
             val logWaterEditText : EditText = view.findViewById(R.id.log_water_edit_text)
             val waterAmount = logWaterEditText.text.toString()
 
-            //Check to see if water amount entered when "SAVE" pressed by user.
+            //Check to see if water amount entered when "SAVE" pressed by user, and save log.
             if (! waterAmount.isEmpty())
                 sharedPreferences.add(sharedPreferences.getCurrentDateTime(), waterAmount.toInt())
 
@@ -76,6 +64,10 @@ class LogWaterFragment : Fragment() {
         }
     }
 
+    /**
+     * A function used to handle a user cancelling a water log entry.
+     * @param view: The current view.
+     */
     private fun cancelLogWaterEvent(view : View) {
         val cancelLogWaterButton : Button = view.findViewById(R.id.cancel_log_water_button)
         cancelLogWaterButton.setOnClickListener {
@@ -84,6 +76,11 @@ class LogWaterFragment : Fragment() {
         }
     }
 
+    /**
+     * A function used to handle a user saving a water goal entry.
+     * @param view: The current view
+     * @param sharedPreferences: The SharedPreferences object.
+     */
     private fun saveWaterGoalEvent(view : View, sharedPreferences : SharedPreferences) {
         val saveWaterGoalButton : Button = view.findViewById(R.id.save_water_goal_button)
         saveWaterGoalButton.setOnClickListener {
@@ -91,7 +88,7 @@ class LogWaterFragment : Fragment() {
             val waterGoalEditText : EditText = view.findViewById(R.id.water_goal_edit_text)
             val waterAmount = waterGoalEditText.text.toString()
 
-            //Check to see if water amount entered when "SAVE" pressed by user.
+            //Check to see if water amount entered when "SAVE" pressed by user, and save goal.
             if (! waterAmount.isEmpty())
                 sharedPreferences.add("WATER_GOAL", waterAmount.toInt())
 
@@ -100,6 +97,10 @@ class LogWaterFragment : Fragment() {
         }
     }
 
+    /**
+     * A function used to handle a user cancelling a water goal entry.
+     * @param view: The current view.
+     */
     private fun cancelWaterGoalEvent(view : View) {
         val cancelWaterGoalButton : Button = view.findViewById(R.id.cancel_water_goal_button)
         cancelWaterGoalButton.setOnClickListener {
@@ -108,30 +109,13 @@ class LogWaterFragment : Fragment() {
         }
     }
 
+    /**
+     * A function to return to the HomeFragment.
+     */
     private fun returnHome() {
         val manager = requireActivity().supportFragmentManager
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.frameLayout, HomeFragment())
         transaction.commit()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LogWaterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LogWaterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

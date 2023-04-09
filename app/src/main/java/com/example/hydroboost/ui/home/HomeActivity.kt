@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         homeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(homeBinding.root)
 
+        //Handle nav bar selection events.
         homeBinding.navBar.setOnItemSelectedListener {
             var item = it.itemId
 
@@ -44,6 +45,10 @@ class HomeActivity : AppCompatActivity() {
         updateFrameLayoutFromNavBar(HomeFragment())
     }
 
+    /**
+     * A function used to switch fragments as defined from nav bar selection.
+     * @param fragment: The fragment to switch to.
+     */
     private fun updateFrameLayoutFromNavBar(fragment : Fragment) {
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()

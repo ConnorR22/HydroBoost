@@ -8,7 +8,6 @@ package com.example.hydroboost.ui.history
  * @version: 1.0.0
  */
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
@@ -22,60 +21,44 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.hydroboost.R
-import com.example.hydroboost.ui.SharedPreferences
+import com.example.hydroboost.data.SharedPreferences
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        view as ViewGroup
-        val view = inflater.inflate(R.layout.fragment_history, container, false)
-
         // Inflate the layout for this fragment
-        return view
+        return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view as ViewGroup
 
+        //Create SharedPreferences instance
         val sharedPreferences = SharedPreferences(requireContext())
 
+        //Get a list of dates in descending order
         val sharedPreferencesListSorted = sharedPreferences.getDescendingDates()
         val historyListLinearLayout = view?.findViewById<LinearLayout>(R.id.history_list)
 
+        //Create a MutableList to hold unique date values
         val uniqueDates : MutableList<String> = mutableListOf<String>()
-
         for ((dateTime, amount) in sharedPreferencesListSorted) {
+            //Skip over WATER_GOAL instance in SharedPreferences
             if (dateTime == "WATER_GOAL")
                 continue
 
+            //Separate date, time values
             val date = dateTime.substring(0, 10)
             val time = dateTime.substring(11, 19)
 
+            //Create a header for each unique date and add it to View
             if (! uniqueDates.contains(date)) {
                 uniqueDates.add(date)
                 val dateHeader = dateHeaderFun(date)
@@ -85,15 +68,18 @@ class HistoryFragment : Fragment() {
                 historyListLinearLayout?.addView(headerLine)
             }
 
+            //Instantiate the water log entry, and removal button to View
             val waterLogButtonContainer = waterLogButtonContainerFun(dateTime)
             val waterLogEntry = waterLogEntryFun(date, time, amount as Int)
             val removeLogButton = removeLogButtonFun(dateTime)
 
+            //A listener to remove water log entry when remove button pressed.
             removeLogButton.setOnClickListener() {
                 sharedPreferences.remove(dateTime)
                 returnHistory()
             }
 
+            //Add the water log entry, and removal button to View
             waterLogButtonContainer?.addView(waterLogEntry)
             waterLogButtonContainer?.addView(removeLogButton)
             historyListLinearLayout?.addView(waterLogButtonContainer)
@@ -101,7 +87,7 @@ class HistoryFragment : Fragment() {
     }
 
     /**
-     *
+     * A function to return to (reload) the HistoryFragment.
      */
     private fun returnHistory() {
         val manager = requireActivity().supportFragmentManager
@@ -110,9 +96,16 @@ class HistoryFragment : Fragment() {
         transaction.commit()
     }
 
+    /**
+     * A function used to create a TextView as a date header within the LinearLayout, within the
+     * ScrollView of this Fragment.
+     * @param date: A String representing each unique date (yyyy-mm-dd).
+     * @return The created TextView.
+     */
     private fun dateHeaderFun(date : String): TextView {
         val dateHeader = TextView(requireContext())
         val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+
         layoutParams.setMargins(25, 25,0, 0)
         dateHeader.layoutParams = layoutParams
 
@@ -126,9 +119,16 @@ class HistoryFragment : Fragment() {
         return dateHeader
     }
 
+    /**
+     * A function used to create a View to separate the dateHeader and the water logs within the
+     * LinearLayout, within the ScrollView of this Fragment.
+     * @param date: A String representing each unique date (yyyy-mm-dd).
+     * @return The created View.
+     */
     private fun headerLineFun() : View {
         val headerLine = View(requireContext())
         val layoutParams = LinearLayout.LayoutParams(1060, 6)
+
         layoutParams.setMargins(10, 0, 0, 0)
         headerLine.layoutParams = layoutParams
 
@@ -137,6 +137,12 @@ class HistoryFragment : Fragment() {
         return headerLine
     }
 
+    /**
+     * A function used to create a Button to remove a log from history within the LinearLayout,
+     * within the ScrollView of this Fragment.
+     * @param date: A String representing each unique date (yyyy-mm-dd).
+     * @return The created Button.
+     */
     private fun removeLogButtonFun(dateTime : String): Button {
         val removeLogButton = Button(requireContext())
         val layoutParams = LinearLayout.LayoutParams(110, 110, 0f)
@@ -150,6 +156,14 @@ class HistoryFragment : Fragment() {
         return removeLogButton
     }
 
+    /**
+     * A function used to create a TextView representing a water logs within the
+     * LinearLayout, within the ScrollView of this Fragment. Contains date, time and amount drank.
+     * @param date: A String representing each date (yyyy-mm-dd).
+     * @param time: A String representing the time (hh-MM-ss).
+     * @param amount: An Int representing the amount of water drank for the instance.
+     * @return The created TextView.
+     */
     private fun waterLogEntryFun(date : String, time : String, amount : Int): TextView {
         val waterLogEntry = TextView(requireContext())
         val layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
@@ -166,6 +180,12 @@ class HistoryFragment : Fragment() {
         return waterLogEntry
     }
 
+    /**
+     * A function used to create a LinearLayout to hold the water log entry and remove button within
+     * the LinearLayout, within the ScrollView of this Fragment.
+     * @param date: A String representing each date (yyyy-mm-dd).
+     * @return The created LinearLayout.
+     */
     private fun waterLogButtonContainerFun(dateTime : String): LinearLayout {
         val waterLogButtonContainer = LinearLayout(requireContext())
         waterLogButtonContainer.orientation = LinearLayout.HORIZONTAL
@@ -174,25 +194,5 @@ class HistoryFragment : Fragment() {
         waterLogButtonContainer.id = (dateTime + "_container").hashCode()
 
         return waterLogButtonContainer
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment history.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }
