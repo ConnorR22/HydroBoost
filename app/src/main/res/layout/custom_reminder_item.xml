@@ -51,7 +51,7 @@
 
         <Switch
             android:id="@+id/activateReminder"
-            android:layout_width="125dp"
+            android:layout_width="77dp"
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

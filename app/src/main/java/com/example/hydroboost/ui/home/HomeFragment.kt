@@ -38,8 +38,7 @@ class HomeFragment : Fragment() {
     private var waterFillingView : View? = null
     private var sharedPreferences : SharedPreferences? = null
     private lateinit var waterBottleImage : ImageView
-
-    private lateinit var calendar: Calendar
+    private var activeReminderToSet : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +69,6 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        // TODO replace button functionality to route to either the custom reminders or notifications page
-        // TODO sample alarm manager for sending notification
         val settingsButton = rootView.findViewById<ImageButton>(R.id.settingsButton)
 
         startReminders()
@@ -89,9 +86,53 @@ class HomeFragment : Fragment() {
             context!!.getString(R.string.reminder_settings),
             Context.MODE_PRIVATE
         )
-        val style = sharedPreferencesSettings!!.getString("style", "")
-        val startTime = sharedPreferencesSettings.getString("startTime", "")
+        val customReminderPreferences = context?.getSharedPreferences(
+            context!!.getString(R.string.custom_reminders_settings),
+            Context.MODE_PRIVATE
+        )
+        var customReminders = customReminderPreferences?.getString("CUSTOM_REMINDERS", "")
+        var activeReminders = customReminderPreferences?.getString("ACTIVE_REMINDERS", "")
 
+        activeReminderToSet = ""
+
+        var calendar = Calendar.getInstance()
+        val day = calendar.get(Calendar.DAY_OF_WEEK)
+
+        var crs = customReminders?.split("|")
+        var crsActive = activeReminders?.split("|")
+        for (reminder in crs!!){
+            if (reminder != ""){
+                for (active in crsActive!!) {
+
+                    var fields = reminder.split(",")
+                    var activeDay = 0
+                    when (fields[4]){
+                        "Sunday" -> activeDay = 1
+                        "Monday" -> activeDay = 2
+                        "Tuesday" -> activeDay = 3
+                        "Wednesday" -> activeDay = 4
+                        "Thursday" -> activeDay = 5
+                        "Friday" -> activeDay = 6
+                        "Saturday" -> activeDay = 7
+                    }
+
+                    if (fields[0].equals(active) && activeDay == day)
+                        activeReminderToSet = reminder
+                        break
+                }
+            }
+        }
+
+        var style = ""
+        var startTime = ""
+
+        if (activeReminderToSet != ""){
+            style = activeReminderToSet!!.split(",")[1]
+            startTime = activeReminderToSet!!.split(",")[2]
+        } else {
+            style = sharedPreferencesSettings!!.getString("style", "").toString()
+            startTime = sharedPreferencesSettings.getString("startTime", "").toString()
+        }
 
         var interval = 0L
         when (style) {
@@ -100,10 +141,8 @@ class HomeFragment : Fragment() {
             "Every 2 Hours" -> interval = AlarmManager.INTERVAL_HOUR * 2
         }
 
-        val times1 = startTime?.split(":")
-
-        var calendar = Calendar.getInstance()
-        calendar[Calendar.HOUR_OF_DAY] = times1!!.get(0).toInt()
+        val times1 = startTime.split(":")
+        calendar[Calendar.HOUR_OF_DAY] = times1.get(0).toInt()
         calendar[Calendar.MINUTE] = times1.get(1).toInt()
         calendar[Calendar.SECOND] = 0
         calendar[Calendar.MILLISECOND] = 0
@@ -126,8 +165,14 @@ class HomeFragment : Fragment() {
             Context.MODE_PRIVATE
         )
 
-        val endTime = sharedPreferencesSettings!!.getString("endTime", "")
-        val times1 = endTime?.split(":")
+        var endTime = ""
+        if (activeReminderToSet != ""){
+            endTime = activeReminderToSet!!.split(",")[2]
+        } else {
+            endTime = sharedPreferencesSettings!!.getString("endTime", "").toString()
+        }
+
+        val times1 = endTime.split(":")
         var calendar = Calendar.getInstance()
         calendar[Calendar.HOUR_OF_DAY] = times1!!.get(0).toInt()
         calendar[Calendar.MINUTE] = times1.get(1).toInt()
