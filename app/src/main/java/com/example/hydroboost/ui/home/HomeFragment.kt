@@ -23,13 +23,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.lifecycleScope
 import com.example.hydroboost.R
-import com.example.hydroboost.data.SharedPreferences
 import com.example.hydroboost.ui.SharedPreferences
 import com.example.hydroboost.ui.notifications.NotificationBroadcast
-import com.example.hydroboost.ui.notifications.NotificationsFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

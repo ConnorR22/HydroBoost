@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.hydroboost.R
 import com.example.hydroboost.ui.SharedPreferences
+import com.example.hydroboost.ui.home.NotificationsFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
