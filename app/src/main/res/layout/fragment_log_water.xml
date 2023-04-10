@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+XML layout for the LogWaterFragment.
+Author: Ben Hickman
+Date: 2023/04/09
+-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.LogWaterFragment"
+    android:background="@color/color1">
+
+    <TextView
+        android:id="@+id/log_water_text_view"
+        android:layout_width="201dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="105dp"
+        android:text="Water Drank (ml):"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/log_water_edit_text"
+        android:layout_width="201dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginLeft="105dp"
+        android:hint="0ml"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/cancel_log_water_button"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="105dp"
+        android:backgroundTint="@color/color6"
+        android:text="CANCEL"
+        android:textSize="14dp"
+        android:textColor="@color/color3"
+        android:padding="0dp"/>
+
+    <Button
+        android:id="@+id/save_log_water_button"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="211dp"
+        android:backgroundTint="@color/color6"
+        android:text="SAVE"
+        android:textSize="14dp"
+        android:textColor="@color/color3"
+        android:padding="0dp"/>
+
+    <TextView
+        android:id="@+id/water_goal_text_view"
+        android:layout_width="201dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="105dp"
+        android:text="Set Water Goal (ml):"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/water_goal_edit_text"
+        android:layout_width="201dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="105dp"
+        android:hint="0ml"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/cancel_water_goal_button"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="105dp"
+        android:backgroundTint="@color/color6"
+        android:text="CANCEL"
+        android:textSize="14dp"
+        android:textColor="@color/color3"
+        android:padding="0dp"/>
+
+    <Button
+        android:id="@+id/save_water_goal_button"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="211dp"
+        android:backgroundTint="@color/color6"
+        android:text="SAVE"
+        android:textSize="14dp"
+        android:textColor="@color/color3"
+        android:padding="0dp"/>
+
+</FrameLayout>

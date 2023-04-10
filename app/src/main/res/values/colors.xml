@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+XML layout for the color codes.
+Author: Ben Hickman
+Date: 2023/04/09
+-->
+
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -7,4 +13,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color1">#ABDBE3</color>
+    <color name="color2">#89C5D5</color>
+    <color name="color3">#67AEC8</color>
+    <color name="color4">#4598BC</color>
+    <color name="color5">#1E81B0</color>
+    <color name="color6">#001220</color>
+    <color name="color7">#FFD700</color>
 </resources>
