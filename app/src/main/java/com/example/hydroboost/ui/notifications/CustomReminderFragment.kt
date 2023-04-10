@@ -51,6 +51,13 @@ class CustomReminderFragment : Fragment() {
 
         val t=inflater.inflate(R.layout.fragment_custom_reminder, container, false)
 
+        val backButton = t.findViewById<ImageButton>(R.id.backButton)
+        backButton.setOnClickListener {
+            val fragment = RemindersFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayout,fragment)?.commit()
+        }
+
         val addButton = t.findViewById<ImageButton>(R.id.addCustomReminder)
         addButton.setOnClickListener {
             val fragment = CreateCustomReminderFragment()

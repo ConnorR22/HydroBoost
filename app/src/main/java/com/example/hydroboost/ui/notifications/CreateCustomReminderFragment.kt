@@ -54,6 +54,13 @@ class CreateCustomReminderFragment : Fragment() {
 
         val t = inflater.inflate(R.layout.fragment_create_custom_reminder, container, false)
 
+        val backButton = t.findViewById<ImageButton>(R.id.backButton)
+        backButton.setOnClickListener {
+            val fragment = CustomReminderFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayout,fragment)?.commit()
+        }
+
         val intervals = resources.getStringArray(R.array.intervals)
         val spinnerReminder = t.findViewById<Spinner>(R.id.intervalSelect)
         spinnerReminder?.adapter = activity?.applicationContext?.let { ArrayAdapter(it, R.layout.spinner_item, intervals) } as SpinnerAdapter
@@ -103,12 +110,13 @@ class CreateCustomReminderFragment : Fragment() {
         )
         val reminder = customReminderPreferences!!.getString("EDIT_REMINDER", "")
         if (reminder != "")
-            loadReminder(titleText, spinnerReminder, tpStart, tpEnd, spinnerDays)
+            loadReminder(backButton, titleText, spinnerReminder, tpStart, tpEnd, spinnerDays)
 
         return t
     }
 
     private fun loadReminder(
+        backButton: ImageButton,
         titleText: EditText,
         spinnerReminder: Spinner,
         tpStart: TimePicker,
@@ -120,6 +128,8 @@ class CreateCustomReminderFragment : Fragment() {
             Context.MODE_PRIVATE
         )
         val reminder = customReminderPreferences!!.getString("EDIT_REMINDER", "")!!.split(",")
+
+        backButton.setVisibility(View.INVISIBLE)
 
         title = reminder[0]
         titleText.setText(title)
