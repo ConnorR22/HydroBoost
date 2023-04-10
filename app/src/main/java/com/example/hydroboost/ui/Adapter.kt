@@ -1,5 +1,14 @@
 package com.example.hydroboost.ui
 
+/**
+ * An adpater class to preload custom reminders elements
+ * dynamically onto the custom reminders fragment
+ * @author: Connor Russell
+ * @date: 2023/04/10
+ * @version: 1.0.0
+ */
+
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

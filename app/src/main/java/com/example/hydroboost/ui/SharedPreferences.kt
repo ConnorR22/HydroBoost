@@ -11,14 +11,7 @@ class SharedPreferences(context : Context, attrs: AttributeSet? = null) {
         context.getString(R.string.preference_file_key),
         Context.MODE_PRIVATE
     )
-    private val sharedPreferencesSettings = context.getSharedPreferences(
-        context.getString(R.string.reminder_settings),
-        Context.MODE_PRIVATE
-    )
-    private val sharedPreferencesCustomReminders  = context.getSharedPreferences(
-        context.getString(R.string.custom_reminders_settings),
-        Context.MODE_PRIVATE
-    )
+
     private val sharedPreferencesEditor = sharedPreferences?.edit()
     private val dateTimeFormatter = SimpleDateFormat(context.getString(R.string.date_time_format))
 
