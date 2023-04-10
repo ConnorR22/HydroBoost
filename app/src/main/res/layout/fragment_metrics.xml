@@ -3,12 +3,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.metrics.MetricsFragment">
+    tools:context=".ui.metrics.MetricsFragment"
+    android:background="@color/color1">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Metrics Fragment" />
+        android:id="@+id/analyticsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="93dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="Daily Analytics" />
+
+    <TextView
+        android:id="@+id/statisticsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="93dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Intake Statistics" />
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="360dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="93dp" />
+
+    <TextView
+        android:id="@+id/percentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="155dp"
+        android:layout_marginEnd="93dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Avg. Percent Daily Intake" />
+
+    <TextView
+        android:id="@+id/percentValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="335dp"
+        android:layout_marginTop="155dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="100%" />
+
+    <TextView
+        android:id="@+id/intakeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="93dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Daily Intake (ML)" />
+
+    <TextView
+        android:id="@+id/intakeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="200dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="0.0/0.0 ML" />
+
+    <TextView
+        android:id="@+id/lowestTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="245dp"
+        android:layout_marginEnd="93dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Lowest Intake Amount" />
+
+    <TextView
+        android:id="@+id/lowestValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="335dp"
+        android:layout_marginTop="245dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="0 ML" />
+
+    <TextView
+        android:id="@+id/highestTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="93dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Highest Intake Amount" />
+
+    <TextView
+        android:id="@+id/highestValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="335dp"
+        android:layout_marginTop="290dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="0 ML" />
 
 </FrameLayout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.notifications.NotificationsFragment"
+    android:background="@color/color1">
+
+    <TextView
+        android:id="@+id/notificationTitle"
+        android:layout_width="198dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="93dp"
+        android:text="Notification Settings"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/notificationInfo"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="93dp"
+        android:text="Tip: Notifications can be enabled in the App Settings!"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/messageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="93dp"
+        android:text="Reminder Message"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="360dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="93dp"/>
+
+    <EditText
+        android:id="@+id/messageEdit"
+        android:layout_width="358dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="93dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="E.g. 'Time to Hydrate!'"
+        android:inputType="textMultiLine"
+        android:textSize="16sp"
+         />
+
+    <TextView
+        android:id="@+id/deliveryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="275dp"
+        android:layout_marginEnd="93dp"
+        android:text="Notification Delivery Sound"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="360dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="93dp" />
+
+    <Switch
+        android:id="@+id/deliverySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="65dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="93dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/remindersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="395dp"
+        android:layout_marginEnd="93dp"
+        android:text="Receive Achievement Reminders"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="360dp"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="93dp" />
+
+    <Switch
+        android:id="@+id/remindersSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="420dp"
+        android:layout_marginEnd="93dp"
+        android:switchMinWidth="65dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Button
+        android:id="@+id/saveNotifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginEnd="93dp"
+        android:text="Save"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"/>
+
+</FrameLayout>

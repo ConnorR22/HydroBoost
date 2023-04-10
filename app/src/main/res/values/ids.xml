@@ -2,4 +2,5 @@
 <resources>
     <item name="backButton" type="id" />
     <item name="messageTitle" type="id" />
+    <item type = "id" name = "waterBottleImage" />
 </resources>
