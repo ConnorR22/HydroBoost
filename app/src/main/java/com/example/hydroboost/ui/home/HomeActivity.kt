@@ -15,7 +15,7 @@ import com.example.hydroboost.R
 import com.example.hydroboost.databinding.ActivityHomeBinding
 import com.example.hydroboost.ui.history.HistoryFragment
 import com.example.hydroboost.ui.metrics.MetricsFragment
-import com.example.hydroboost.ui.notifications.NotificationsFragment
+import com.example.hydroboost.ui.notifications.RemindersFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
             if (item == R.id.homeIcon)
                 updateFrameLayoutFromNavBar(HomeFragment())
             else if (item == R.id.notificationsIcon)
-                updateFrameLayoutFromNavBar(NotificationsFragment())
+                updateFrameLayoutFromNavBar(RemindersFragment())
             else if (item == R.id.metricsIcon)
                 updateFrameLayoutFromNavBar(MetricsFragment())
             else if (item == R.id.historyIcon)

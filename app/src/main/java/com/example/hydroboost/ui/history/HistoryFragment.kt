@@ -21,7 +21,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.hydroboost.R
-import com.example.hydroboost.data.SharedPreferences
+import com.example.hydroboost.data.SharedPreferencesBen
 
 class HistoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,10 +41,10 @@ class HistoryFragment : Fragment() {
         view as ViewGroup
 
         //Create SharedPreferences instance
-        val sharedPreferences = SharedPreferences(requireContext())
+        val sharedPreferencesBen = SharedPreferencesBen(requireContext())
 
         //Get a list of dates in descending order
-        val sharedPreferencesListSorted = sharedPreferences.getDescendingDates()
+        val sharedPreferencesListSorted = sharedPreferencesBen.getDescendingDates()
         val historyListLinearLayout = view?.findViewById<LinearLayout>(R.id.history_list)
 
         //Create a MutableList to hold unique date values
@@ -75,7 +75,7 @@ class HistoryFragment : Fragment() {
 
             //A listener to remove water log entry when remove button pressed.
             removeLogButton.setOnClickListener() {
-                sharedPreferences.remove(dateTime)
+                sharedPreferencesBen.remove(dateTime)
                 returnHistory()
             }
 
