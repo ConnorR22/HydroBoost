@@ -41,6 +41,15 @@ class Adapter(private val context: Context, private val arrayList: ArrayList<Str
         var customReminders = customReminderPreferences?.getString("CUSTOM_REMINDERS", "")
         val crEditPrefs = customReminderPreferences?.edit()
 
+        var activeReminders = customReminderPreferences.getString("ACTIVE_REMINDERS", "")
+        var crs = activeReminders?.split("|")
+        for (reminder in crs!!){
+            if (reminder != ""){
+                if (reminder.equals(title.text.toString()))
+                    toggle.isChecked = true
+            }
+        }
+
         editButton.setOnClickListener {
 
             // Grab the reminder, remove it from the existing reminders to be later readded to the list
@@ -86,6 +95,35 @@ class Adapter(private val context: Context, private val arrayList: ArrayList<Str
             val fragment = CustomReminderFragment()
             val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frameLayout,fragment).commit()
+        }
+
+        toggle.setOnClickListener {
+            if (toggle.isChecked){
+                var activeReminders = customReminderPreferences.getString("ACTIVE_REMINDERS", "")
+                activeReminders += "|" + title.text
+
+                if (crEditPrefs != null) {
+                    crEditPrefs.putString("ACTIVE_REMINDERS", activeReminders)
+                    crEditPrefs.apply()
+                }
+                println(activeReminders)
+            } else {
+                var activeReminders = customReminderPreferences.getString("ACTIVE_REMINDERS", "")
+                var newReminders = ""
+                var crs = activeReminders?.split("|")
+                for (reminder in crs!!){
+                    if (reminder != ""){
+                        if (!reminder.equals(title.text.toString()))
+                            newReminders += "|" + reminder
+                    }
+                }
+
+                if (crEditPrefs != null) {
+                    crEditPrefs.putString("ACTIVE_REMINDERS", newReminders)
+                    crEditPrefs.apply()
+                }
+                println(newReminders)
+            }
         }
 
         return view
