@@ -79,7 +79,7 @@ class NotificationsFragment : Fragment() {
 
         val preferences = this.context?.getSharedPreferences("NOTIFICATIONS", Context.MODE_PRIVATE)
 
-        val backButton = view.findViewById<Button>(R.id.backButton)
+        val backButton = view.findViewById<ImageButton>(R.id.backButton)
         val saveButton = view.findViewById<Button>(R.id.saveNotifications)
         val messageEdit = view.findViewById<TextView>(R.id.messageEdit)
         val deliverySwitch = view.findViewById<Switch>(R.id.deliverySwitch)
