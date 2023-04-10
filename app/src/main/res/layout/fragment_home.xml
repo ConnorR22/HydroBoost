@@ -32,15 +32,4 @@
         android:textColor="@color/color3"
         android:padding="0dp" />
 
-    <ImageButton
-        android:id="@+id/settingsButton"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="7dp"
-        android:backgroundTint="@color/color6"
-        android:src="@drawable/baseline_settings_24" />
-
 </FrameLayout>
