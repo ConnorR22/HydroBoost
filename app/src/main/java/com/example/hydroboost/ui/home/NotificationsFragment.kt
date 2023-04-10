@@ -94,17 +94,21 @@ class NotificationsFragment : Fragment() {
         requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             // "it" refers to whether the notification permissions were enabled - let the user know the status upon making their choice
             if (!it) {
-                Snackbar.make(
-                    view.findViewById<View>(android.R.id.content).rootView,
-                    "Please permit notifications in the App Settings",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                view.findViewById<View>(android.R.id.content)?.rootView?.let { it1 ->
+                    Snackbar.make(
+                        it1,
+                        "Please permit notifications in the App Settings",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
             } else {
-                Snackbar.make(
-                    view.findViewById<View>(android.R.id.content).rootView,
-                    "Notifications are now enabled!",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                view.findViewById<View>(android.R.id.content)?.rootView?.let { it1 ->
+                    Snackbar.make(
+                        it1,
+                        "Notifications are now enabled!",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
             }
         }
 
