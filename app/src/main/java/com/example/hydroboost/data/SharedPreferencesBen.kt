@@ -13,7 +13,7 @@ import com.example.hydroboost.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SharedPreferences(context : Context, attrs: AttributeSet? = null) {
+class SharedPreferencesBen(context : Context, attrs: AttributeSet? = null) {
     //Define SharedPreferences object
     private val sharedPreferences = context.getSharedPreferences(
         context.getString(R.string.preference_file_key),

@@ -16,7 +16,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import com.example.hydroboost.R
-import com.example.hydroboost.data.SharedPreferences
+import com.example.hydroboost.data.SharedPreferencesBen
 
 class LogWaterFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +31,12 @@ class LogWaterFragment : Fragment() {
         view as ViewGroup
 
         //Create SharedPreferences object
-        val sharedPreferences = SharedPreferences(requireContext())
+        val sharedPreferencesBen = SharedPreferencesBen(requireContext())
 
         //Define events for saving and cancelling
-        saveLogWaterEvent(view, sharedPreferences)
+        saveLogWaterEvent(view, sharedPreferencesBen)
         cancelLogWaterEvent(view)
-        saveWaterGoalEvent(view, sharedPreferences)
+        saveWaterGoalEvent(view, sharedPreferencesBen)
         cancelWaterGoalEvent(view)
 
         // Inflate the layout for this fragment
@@ -46,9 +46,9 @@ class LogWaterFragment : Fragment() {
     /**
      * A function used to handle a user saving a water log entry.
      * @param view: The current view
-     * @param sharedPreferences: The SharedPreferences object.
+     * @param sharedPreferencesBen: The SharedPreferences object.
      */
-    private fun saveLogWaterEvent(view : View, sharedPreferences : SharedPreferences) {
+    private fun saveLogWaterEvent(view : View, sharedPreferencesBen : SharedPreferencesBen) {
         val saveLogWaterButton : Button = view.findViewById(R.id.save_log_water_button)
         saveLogWaterButton.setOnClickListener {
             //Get the amount of water consumed in ml
@@ -57,7 +57,7 @@ class LogWaterFragment : Fragment() {
 
             //Check to see if water amount entered when "SAVE" pressed by user, and save log.
             if (! waterAmount.isEmpty())
-                sharedPreferences.add(sharedPreferences.getCurrentDateTime(), waterAmount.toInt())
+                sharedPreferencesBen.add(sharedPreferencesBen.getCurrentDateTime(), waterAmount.toInt())
 
             //Move back to home fragment
             returnHome()
@@ -79,9 +79,9 @@ class LogWaterFragment : Fragment() {
     /**
      * A function used to handle a user saving a water goal entry.
      * @param view: The current view
-     * @param sharedPreferences: The SharedPreferences object.
+     * @param sharedPreferencesBen: The SharedPreferences object.
      */
-    private fun saveWaterGoalEvent(view : View, sharedPreferences : SharedPreferences) {
+    private fun saveWaterGoalEvent(view : View, sharedPreferencesBen : SharedPreferencesBen) {
         val saveWaterGoalButton : Button = view.findViewById(R.id.save_water_goal_button)
         saveWaterGoalButton.setOnClickListener {
             //Get the amount of water consumed in ml
@@ -90,7 +90,7 @@ class LogWaterFragment : Fragment() {
 
             //Check to see if water amount entered when "SAVE" pressed by user, and save goal.
             if (! waterAmount.isEmpty())
-                sharedPreferences.add("WATER_GOAL", waterAmount.toInt())
+                sharedPreferencesBen.add("WATER_GOAL", waterAmount.toInt())
 
             //Move back to home fragment
             returnHome()
