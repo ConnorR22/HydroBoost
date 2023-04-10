@@ -10,12 +10,20 @@ package com.example.hydroboost.ui.home
  * @version: 1.0.0
  */
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.lifecycleScope
 import com.example.hydroboost.R
 import com.example.hydroboost.data.SharedPreferences
@@ -27,10 +35,13 @@ class HomeFragment : Fragment() {
     private var sharedPreferences : SharedPreferences? = null
     private lateinit var waterBottleImage : ImageView
 
+    private lateinit var calendar: Calendar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +62,29 @@ class HomeFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    private fun cancelReminders() {
+        val intent = Intent(context, NotificationBroadcast::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE)
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val sharedPreferencesSettings = context?.getSharedPreferences(
+            context!!.getString(R.string.reminder_settings),
+            Context.MODE_PRIVATE
+        )
+
+        val endTime = sharedPreferencesSettings!!.getString("endTime", "")
+        val times1 = endTime?.split(":")
+        var calendar = Calendar.getInstance()
+        calendar[Calendar.HOUR_OF_DAY] = times1!!.get(0).toInt()
+        calendar[Calendar.MINUTE] = times1.get(1).toInt()
+        calendar[Calendar.SECOND] = 0
+        calendar[Calendar.MILLISECOND] = 0
+
+        if (calendar.timeInMillis < System.currentTimeMillis()){
+            alarmManager.cancel(pendingIntent)
+        }
     }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
