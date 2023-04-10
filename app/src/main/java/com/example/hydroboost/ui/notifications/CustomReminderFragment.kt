@@ -1,12 +1,16 @@
 package com.example.hydroboost.ui.notifications
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ListView
+import androidx.fragment.app.Fragment
 import com.example.hydroboost.R
+import com.example.hydroboost.databinding.CustomReminderItemBinding
+import com.example.hydroboost.ui.Adapter
 import com.example.hydroboost.ui.SharedPreferences
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,6 +30,8 @@ class CustomReminderFragment : Fragment() {
 
 
     private var sharedPreferences: SharedPreferences? = null
+    private lateinit var _binding: CustomReminderItemBinding
+    val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +45,10 @@ class CustomReminderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
+        // Inflate the layout for this fragment
         sharedPreferences = SharedPreferences(requireContext())
+
         val t=inflater.inflate(R.layout.fragment_custom_reminder, container, false)
 
         val addButton = t.findViewById<ImageButton>(R.id.addCustomReminder)
@@ -50,6 +57,29 @@ class CustomReminderFragment : Fragment() {
             val transaction = fragmentManager?.beginTransaction()
             transaction?.replace(R.id.frameLayout,fragment)?.commit()
         }
+
+        val customReminderPreferences = context?.getSharedPreferences(
+            context!!.getString(R.string.custom_reminders_settings),
+            Context.MODE_PRIVATE
+        )
+        var customReminders = customReminderPreferences?.getString("CUSTOM_REMINDERS", "")
+
+
+        var listView = t.findViewById<ListView>(R.id.remindersList)
+
+
+        var crs = customReminders?.split("|")
+        println(crs.toString())
+        var titles = arrayListOf<String>()
+        for (reminder in crs!!){
+            if (reminder != ""){
+                var fields = reminder.split(",")
+                titles.add(fields.get(0))
+            }
+        }
+
+        var adapter = Adapter(context!!, titles, )
+        listView.adapter = adapter
 
         return t
     }

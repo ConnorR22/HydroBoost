@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.example.hydroboost.R
-import com.example.hydroboost.ui.ModelPreferences
 import com.example.hydroboost.ui.SharedPreferences
-import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +35,6 @@ class CreateCustomReminderFragment : Fragment() {
 
 
     private var sharedPreferences: SharedPreferences? = null
-    private var modelPreferences: ModelPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +48,8 @@ class CreateCustomReminderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         sharedPreferences = SharedPreferences(requireContext())
-//        modelPreferences = ModelPreferences(requireContext())
 
 
         val t = inflater.inflate(R.layout.fragment_create_custom_reminder, container, false)
@@ -97,9 +92,9 @@ class CreateCustomReminderFragment : Fragment() {
             endTime = "" + tpEnd.hour + ":" + tpEnd.minute
             saveReminder()
 
-//            val fragment = CustomReminderFragment()
-//            val transaction = fragmentManager?.beginTransaction()
-//            transaction?.replace(R.id.frameLayout,fragment)?.commit()
+            val fragment = CustomReminderFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayout,fragment)?.commit()
         }
 
         return t
@@ -107,37 +102,27 @@ class CreateCustomReminderFragment : Fragment() {
 
     private fun saveReminder() {
 
-        ModelPreferences.with(this)
-        data class CustomReminder(val title: String, val style: String, val startTime: String, val endTime: String, val day: String)
-        val customReminders = arrayListOf<CustomReminder>()
-
         val customReminderPreferences = context?.getSharedPreferences(
             context!!.getString(R.string.custom_reminders_settings),
             Context.MODE_PRIVATE
         )
         val crEditPrefs = customReminderPreferences?.edit()
 
-        val cr = CustomReminder(title!!, style!!, startTime!!, endTime!!, day!!)
+        var customReminders = customReminderPreferences?.getString("CUSTOM_REMINDERS", "")
 
-        customReminders.add(cr)
+        customReminders += "|" + title + "," + style + "," + startTime + "," + endTime + "," + day
 
-//        if (customReminderPreferences != null) {
-//            customReminders = customReminderPreferences.getString("CustomReminders", "")
-//        }
+        if (crEditPrefs != null) {
+            crEditPrefs.putString("CUSTOM_REMINDERS",customReminders)
+            crEditPrefs.apply()
+        }
 
-        println("Saved Custom Reminder: \n" + cr)
 
-//        val jsonList = JSONArray(customReminders)
-        println(customReminders.toString())
-
-        val mySet = customReminders.toSet()
-
-        ModelPreferences.put(customReminders, "CUSTOM_REMINDERS")
     }
 
-    fun getSharedPreferences(preferencesFileName: String, modePrivate: Int): SharedPreferences {
-        return sharedPreferences!!
-    }
+//    fun getSharedPreferences(preferencesFileName: String, modePrivate: Int): SharedPreferences {
+//        return sharedPreferences!!
+//    }
 
     companion object {
         /**
