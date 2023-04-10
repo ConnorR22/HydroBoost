@@ -86,8 +86,19 @@ class Adapter(private val context: Context, private val arrayList: ArrayList<Str
                         newReminders += "|" + reminder
                 }
             }
+            var activeReminders = customReminderPreferences.getString("ACTIVE_REMINDERS", "")
+            var reminderList = ""
+            crs = activeReminders?.split("|")
+            for (reminder in crs!!){
+                if (reminder != ""){
+                    if (!reminder.equals(title.text.toString()))
+                        reminderList += "|" + reminder
+                }
+            }
+
 
             if (crEditPrefs != null) {
+                crEditPrefs.putString("ACTIVE_REMINDERS", reminderList)
                 crEditPrefs.putString("CUSTOM_REMINDERS", newReminders)
                 crEditPrefs.apply()
             }
