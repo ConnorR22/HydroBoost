@@ -63,16 +63,16 @@ class HomeFragment : Fragment() {
             goToLogWater()
         }
 
-        val settingsButton = rootView.findViewById<ImageButton>(R.id.settingsButton)
-        settingsButton.setOnClickListener {
-            val manager = requireActivity().supportFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.frameLayout, NotificationsFragment())
-            transaction.commit()
-        }
+        val sharedPreferencesSettings = context?.getSharedPreferences(
+            context!!.getString(R.string.reminder_settings),
+            Context.MODE_PRIVATE
+        )
 
-        startReminders()
-        cancelReminders()
+        val style = sharedPreferencesSettings!!.getString("style", "")
+        if (style != "") {
+            startReminders()
+            cancelReminders()
+        }
 
         return rootView
     }
