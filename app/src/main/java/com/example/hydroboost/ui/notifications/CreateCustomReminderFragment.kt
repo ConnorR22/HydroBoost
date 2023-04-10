@@ -97,7 +97,69 @@ class CreateCustomReminderFragment : Fragment() {
             transaction?.replace(R.id.frameLayout,fragment)?.commit()
         }
 
+        val customReminderPreferences = context?.getSharedPreferences(
+            context!!.getString(R.string.custom_reminders_settings),
+            Context.MODE_PRIVATE
+        )
+        val reminder = customReminderPreferences!!.getString("EDIT_REMINDER", "")
+        if (reminder != "")
+            loadReminder(titleText, spinnerReminder, tpStart, tpEnd, spinnerDays)
+
         return t
+    }
+
+    private fun loadReminder(
+        titleText: EditText,
+        spinnerReminder: Spinner,
+        tpStart: TimePicker,
+        tpEnd: TimePicker,
+        spinnerDays: Spinner
+    ) {
+        val customReminderPreferences = context?.getSharedPreferences(
+            context!!.getString(R.string.custom_reminders_settings),
+            Context.MODE_PRIVATE
+        )
+        val reminder = customReminderPreferences!!.getString("EDIT_REMINDER", "")!!.split(",")
+
+        title = reminder[0]
+        titleText.setText(title)
+
+        style = reminder[1]
+        when (style) {
+            "Every 30 Minutes" -> spinnerReminder.setSelection(0)
+            "Every Hour" -> spinnerReminder.setSelection(1)
+            "Every 2 Hours" -> spinnerReminder.setSelection(2)
+        }
+
+        startTime = reminder[2]
+        val times1 = startTime?.split(":")
+
+        if (startTime != "" && times1 != null) {
+            tpStart.hour = times1.elementAt(0).toInt()
+            tpStart.minute = times1.elementAt(1).toInt()
+        }
+
+        endTime = reminder[3]
+        val times2 = endTime?.split(":")
+        if (endTime != "" && times2 != null) {
+            tpEnd.hour = times2.elementAt(0).toInt()
+            tpEnd.minute = times2.elementAt(1).toInt()
+        }
+
+        day = reminder[4]
+        when (day) {
+            "Sunday"    -> spinnerDays.setSelection(0)
+            "Monday"    -> spinnerDays.setSelection(1)
+            "Tuesday"   -> spinnerDays.setSelection(2)
+            "Wednesday" -> spinnerDays.setSelection(3)
+            "Thursday"  -> spinnerDays.setSelection(4)
+            "Friday"    -> spinnerDays.setSelection(5)
+            "Saturday"  -> spinnerDays.setSelection(6)
+        }
+
+        val crEditPrefs = customReminderPreferences.edit()
+        crEditPrefs!!.putString("EDIT_REMINDER", "")
+        crEditPrefs.apply()
     }
 
     private fun saveReminder() {
@@ -116,8 +178,6 @@ class CreateCustomReminderFragment : Fragment() {
             crEditPrefs.putString("CUSTOM_REMINDERS",customReminders)
             crEditPrefs.apply()
         }
-
-
     }
 
 //    fun getSharedPreferences(preferencesFileName: String, modePrivate: Int): SharedPreferences {

@@ -34,17 +34,37 @@ class Adapter(private val context: Context, private val arrayList: ArrayList<Str
         title.text = arrayList[position]
 
         sharedPreferences = SharedPreferences(context)
-        val customReminderPreferences = context?.getSharedPreferences(
-            context!!.getString(R.string.custom_reminders_settings),
+        val customReminderPreferences = context.getSharedPreferences(
+            context.getString(R.string.custom_reminders_settings),
             Context.MODE_PRIVATE
         )
         var customReminders = customReminderPreferences?.getString("CUSTOM_REMINDERS", "")
-
+        val crEditPrefs = customReminderPreferences?.edit()
 
         editButton.setOnClickListener {
+
+            // Grab the reminder, remove it from the existing reminders to be later readded to the list
+            var reminderToEdit = ""
+            var newReminders = ""
+            var crs = customReminders?.split("|")
+            for (reminder in crs!!){
+                if (reminder != ""){
+                    var fields = reminder.split(",")
+                    if (!fields[0].equals(title.text))
+                        newReminders += "|" + reminder
+                    else
+                        reminderToEdit = reminder
+                }
+            }
+
+            if (crEditPrefs != null) {
+                crEditPrefs.putString("CUSTOM_REMINDERS", newReminders)
+                crEditPrefs.putString("EDIT_REMINDER", reminderToEdit)
+                crEditPrefs.apply()
+            }
             val fragment = CreateCustomReminderFragment()
             val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
-            transaction?.replace(R.id.frameLayout,fragment)?.commit()
+            transaction.replace(R.id.frameLayout,fragment).commit()
         }
 
         deleteButton.setOnClickListener {
@@ -58,9 +78,6 @@ class Adapter(private val context: Context, private val arrayList: ArrayList<Str
                 }
             }
 
-            println(newReminders)
-            val crEditPrefs = customReminderPreferences?.edit()
-
             if (crEditPrefs != null) {
                 crEditPrefs.putString("CUSTOM_REMINDERS", newReminders)
                 crEditPrefs.apply()
@@ -68,7 +85,7 @@ class Adapter(private val context: Context, private val arrayList: ArrayList<Str
 
             val fragment = CustomReminderFragment()
             val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
-            transaction?.replace(R.id.frameLayout,fragment)?.commit()
+            transaction.replace(R.id.frameLayout,fragment).commit()
         }
 
         return view
