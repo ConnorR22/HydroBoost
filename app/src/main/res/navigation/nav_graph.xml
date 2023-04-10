@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/reminderFragment"
+        tools:layout="@layout/fragment_reminders" >
+        <action
+            android:id="@+id/action_reminderFragment_to_addCustomReminderFragment"
+            app:destination="@id/addCustomReminderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addCustomReminderFragment"
+        tools:layout="@layout/fragment_custom_reminder" >
+        <action
+            android:id="@+id/action_addCustomReminderFragment_to_reminderFragment"
+            app:destination="@id/reminderFragment" />
+        <action
+            android:id="@+id/action_addCustomReminderFragment_to_createCustomFragment"
+            app:destination="@id/createCustomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCustomFragment"
+        tools:layout="@layout/fragment_create_custom_reminder" >
+        <action
+            android:id="@+id/action_createCustomFragment_to_addCustomReminderFragment"
+            app:destination="@id/addCustomReminderFragment" />
+    </fragment>
+
+</navigation>
