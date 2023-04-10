@@ -73,9 +73,47 @@ class HomeFragment : Fragment() {
         // TODO replace button functionality to route to either the custom reminders or notifications page
         // TODO sample alarm manager for sending notification
         val settingsButton = rootView.findViewById<ImageButton>(R.id.settingsButton)
+
+        startReminders()
         cancelReminders()
 
         return rootView
+    }
+
+    private fun startReminders() {
+        val intent = Intent(context, NotificationBroadcast::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE)
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val sharedPreferencesSettings = context?.getSharedPreferences(
+            context!!.getString(R.string.reminder_settings),
+            Context.MODE_PRIVATE
+        )
+        val style = sharedPreferencesSettings!!.getString("style", "")
+        val startTime = sharedPreferencesSettings.getString("startTime", "")
+
+
+        var interval = 0L
+        when (style) {
+            "Every 30 Minutes" -> interval = AlarmManager.INTERVAL_HALF_HOUR
+            "Every Hour" -> interval = AlarmManager.INTERVAL_HOUR
+            "Every 2 Hours" -> interval = AlarmManager.INTERVAL_HOUR * 2
+        }
+
+        val times1 = startTime?.split(":")
+
+        var calendar = Calendar.getInstance()
+        calendar[Calendar.HOUR_OF_DAY] = times1!!.get(0).toInt()
+        calendar[Calendar.MINUTE] = times1.get(1).toInt()
+        calendar[Calendar.SECOND] = 0
+        calendar[Calendar.MILLISECOND] = 0
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            interval,
+            pendingIntent
+        )
     }
 
     private fun cancelReminders() {
