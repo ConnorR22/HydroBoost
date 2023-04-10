@@ -23,6 +23,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.hydroboost.R
 import com.example.hydroboost.ui.SharedPreferences
+import com.example.hydroboost.ui.home.HomeFragment
 import com.example.hydroboost.ui.home.NotificationsFragment
 
 // TODO: Rename parameter arguments, choose names that match
@@ -84,6 +85,9 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             startTime = "" + tpStart.hour + ":" + tpStart.minute
             endTime = "" + tpEnd.hour + ":" + tpEnd.minute
             saveReminder()
+            val fragment = HomeFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayout,fragment)?.commit()
         }
 
         val notificationNav = t.findViewById<ImageButton>(R.id.notifications)
