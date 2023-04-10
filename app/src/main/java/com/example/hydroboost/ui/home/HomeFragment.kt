@@ -27,6 +27,9 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.lifecycleScope
 import com.example.hydroboost.R
 import com.example.hydroboost.data.SharedPreferences
+import com.example.hydroboost.ui.SharedPreferences
+import com.example.hydroboost.ui.notifications.NotificationBroadcast
+import com.example.hydroboost.ui.notifications.NotificationsFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -61,6 +64,12 @@ class HomeFragment : Fragment() {
         }
 
         val settingsButton = rootView.findViewById<ImageButton>(R.id.settingsButton)
+        settingsButton.setOnClickListener {
+            val manager = requireActivity().supportFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.frameLayout, NotificationsFragment())
+            transaction.commit()
+        }
 
         startReminders()
         cancelReminders()
@@ -107,9 +116,10 @@ class HomeFragment : Fragment() {
                         "Saturday" -> activeDay = 7
                     }
 
-                    if (fields[0].equals(active) && activeDay == day)
+                    if (fields[0].equals(active) && activeDay == day) {
                         activeReminderToSet = reminder
                         break
+                    }
                 }
             }
         }
