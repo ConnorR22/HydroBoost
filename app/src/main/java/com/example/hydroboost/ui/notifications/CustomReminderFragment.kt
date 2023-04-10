@@ -1,5 +1,14 @@
 package com.example.hydroboost.ui.notifications
 
+/**
+ * Custom Reminders fragment is an activity that displays the users saved custom reminders
+ * and allows them to access the creation/edit fragment for new and existing custom reminders
+ * along with deleting reminders
+ * @author: Connor Russell
+ * @date: 2023/04/07
+ * @version: 1.0.0
+ */
+
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater

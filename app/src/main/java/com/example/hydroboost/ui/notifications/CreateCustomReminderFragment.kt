@@ -1,5 +1,13 @@
 package com.example.hydroboost.ui.notifications
 
+/**
+ * Create Custom Reminders fragment is an activity that allows users to create, edit and
+ * store custom reminders to be displayed on the Custom Reminders fragment
+ * @author: Connor Russell
+ * @date: 2023/04/09
+ * @version: 1.0.0
+ */
+
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment

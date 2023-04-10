@@ -1,5 +1,13 @@
 package com.example.hydroboost.ui.notifications
 
+/**
+ * Reminders Fragment to display interval settings set by the user, and adjust the time frame
+ * to receive notifications
+ * @author: Connor Russell
+ * @date: 2023/04/05
+ * @version: 1.0.0
+ */
+
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.TimePickerDialog
