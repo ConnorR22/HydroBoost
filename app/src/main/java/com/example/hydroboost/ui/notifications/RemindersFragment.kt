@@ -1,7 +1,11 @@
 package com.example.hydroboost.ui.notifications
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -160,6 +164,37 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             sharedPreferencesEditor.putString("endTime", endTime)
             sharedPreferencesEditor.apply()
         }
+
+        val intent = Intent(context, NotificationBroadcast::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE)
+        val alarmManager = activity?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val style = sharedPreferencesSettings!!.getString("style", "")
+        val startTime = sharedPreferencesSettings.getString("startTime", "")
+
+
+        var interval = 0L
+        when (style) {
+            "Every 30 Minutes" -> interval = AlarmManager.INTERVAL_HALF_HOUR
+            "Every Hour" -> interval = AlarmManager.INTERVAL_HOUR
+            "Every 2 Hours" -> interval = AlarmManager.INTERVAL_HOUR * 2
+        }
+
+        val times1 = startTime?.split(":")
+
+        var calendar = Calendar.getInstance()
+        calendar[Calendar.HOUR_OF_DAY] = times1!!.get(0).toInt()
+        calendar[Calendar.MINUTE] = times1.get(1).toInt()
+        calendar[Calendar.SECOND] = 0
+        calendar[Calendar.MILLISECOND] = 0
+
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            interval,
+            pendingIntent
+        )
     }
 
     override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
