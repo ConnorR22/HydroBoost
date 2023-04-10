@@ -84,6 +84,9 @@ class RemindersFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
             startTime = "" + tpStart.hour + ":" + tpStart.minute
             endTime = "" + tpEnd.hour + ":" + tpEnd.minute
             saveReminder()
+            val fragment = RemindersFragment()
+            val transaction = fragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frameLayout,fragment)?.commit()
         }
 
         val notificationNav = t.findViewById<ImageButton>(R.id.notifications)
