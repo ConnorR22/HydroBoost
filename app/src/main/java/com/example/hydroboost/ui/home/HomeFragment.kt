@@ -149,8 +149,7 @@ class HomeFragment : Fragment() {
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-//            interval,
-            10000,
+            interval,
             pendingIntent
         )
     }

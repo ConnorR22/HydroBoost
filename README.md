@@ -1,5 +1,10 @@
 # HydroBoost
-
+When running our application, please use the Pixel 6 emulator, with system image:
+Release Name: R
+API Level: 30
+ABI: x86
+Target: Android 11.0 (Google APIs)
+in portrait mode.
 
 
 ## Getting started
