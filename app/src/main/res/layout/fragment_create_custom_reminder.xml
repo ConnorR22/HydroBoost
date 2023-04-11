@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.notifications.CreateCustomReminderFragment">
+    tools:context=".ui.notifications.CreateCustomReminderFragment"
+    android:background="@color/color1">
 
     <ImageButton
         android:id="@+id/backButton"
@@ -13,6 +14,7 @@
         android:layout_marginStart="29dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="84dp"
+        android:backgroundTint="@color/color6"
         app:layout_constraintBottom_toTopOf="@+id/messageTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +32,8 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/messageTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -46,6 +50,7 @@
         android:text="Title"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
@@ -73,7 +78,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="160dp"
-        />
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/messageTitle"
@@ -84,6 +89,7 @@
         android:text="Reminder Style"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
@@ -113,6 +119,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="230dp"
         android:textAlignment="textEnd"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
@@ -127,6 +134,7 @@
         android:text="Start Time"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
@@ -155,6 +163,7 @@
         android:layout_marginTop="280dp"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:fontFamily="sans-serif-condensed"
         android:timePickerMode="spinner"
         app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -172,6 +181,7 @@
         android:text="End Time"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
@@ -200,6 +210,7 @@
         android:layout_marginTop="410dp"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:fontFamily="sans-serif-condensed"
         android:timePickerMode="spinner"
         app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -217,6 +228,7 @@
         android:text="Day of The Week"
         android:textColor="@color/black"
         android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
@@ -246,6 +258,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="570dp"
         android:textAlignment="textEnd"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintStart_toStartOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/view3" />
@@ -257,8 +270,10 @@
         android:layout_marginStart="250dp"
         android:layout_marginTop="600dp"
         android:text="Save Settings"
-        android:textColor="@color/black"
+        android:textColor="@color/color3"
         android:textSize="12sp"
+        android:backgroundTint="@color/color6"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"

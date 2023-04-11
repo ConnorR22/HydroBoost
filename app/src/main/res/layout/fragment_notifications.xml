@@ -12,7 +12,8 @@
         android:layout_height="49dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/baseline_arrow_back_24" />
+        android:src="@drawable/baseline_arrow_back_24"
+        android:backgroundTint="@color/color6"/>
 
     <TextView
         android:id="@+id/notificationTitle"
@@ -24,7 +25,9 @@
         android:text="Notification Settings"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:textSize="24sp"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/notificationInfo"
@@ -34,6 +37,7 @@
         android:layout_marginTop="85dp"
         android:layout_marginEnd="93dp"
         android:text="Tip: Notifications can be enabled in the App Settings!"
+        android:fontFamily="sans-serif-condensed"
         android:visibility="visible" />
 
     <TextView
@@ -44,6 +48,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginEnd="93dp"
         android:text="Reminder Message"
+        android:fontFamily="sans-serif-condensed"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
@@ -68,7 +73,7 @@
         android:hint="E.g. 'Time to Hydrate!'"
         android:inputType="textMultiLine"
         android:textSize="16sp"
-         />
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/deliveryTitle"
@@ -79,7 +84,8 @@
         android:layout_marginEnd="93dp"
         android:text="Notification Delivery Sound"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"/>
 
     <View
         android:id="@+id/view4"
@@ -109,7 +115,8 @@
         android:layout_marginEnd="93dp"
         android:text="Receive Achievement Reminders"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed"/>
 
     <View
         android:id="@+id/view5"
@@ -137,5 +144,8 @@
         android:layout_marginStart="165dp"
         android:layout_marginTop="520dp"
         android:layout_marginEnd="93dp"
-        android:text="Save" />
+        android:text="Save"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/color3"
+        android:backgroundTint="@color/color6"/>
 </FrameLayout>

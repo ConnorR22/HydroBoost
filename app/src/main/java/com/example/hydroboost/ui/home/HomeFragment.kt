@@ -6,6 +6,7 @@ package com.example.hydroboost.ui.home
  * Also displays hydration facts, and a link to the LogWaterFragment to log water entries
  * and set daily water goal.
  * @author: Ben Hickman
+ * @edited: Connor Russell
  * @date: 2023/04/09
  * @version: 1.0.0
  */
@@ -202,6 +203,12 @@ class HomeFragment : Fragment() {
 
         //Define percentage of water goal met
         val percentage = sharedPreferences?.getPercentageOfGoalDrank() //percentage = 1: 1%, percentage = 100: 100%
+        val waterXPosition = 371
+//        val waterYPosition = 1413
+        val waterYPosition = 1563
+        val waterWidth = 338
+        val waterHeight = 1068
+
         //Fill the water bottle within the bottle image based on percentage
         lifecycleScope.launch {
             for (i in 1..percentage!!) {
@@ -211,10 +218,10 @@ class HomeFragment : Fragment() {
                 if (percentage != null)
                     addWater(
                         view,
-                        371,
-                        (1413 - (1068 * (i / 100.0))).toInt(),
-                        338,
-                        (1068 * (i / 100.0)).toInt()
+                        waterXPosition,
+                        (waterYPosition - (waterHeight * (i / 100.0))).toInt(),
+                        waterWidth,
+                        (waterHeight * (i / 100.0)).toInt()
                     )
                 addWaterBottle(view)
                 delay(15)
@@ -242,7 +249,8 @@ class HomeFragment : Fragment() {
             waterBottleImage.setImageResource(R.drawable.water_bottle_with_background)
 
         val waterBottleImageParams = LinearLayout.LayoutParams(338, 1284)
-        waterBottleImageParams.setMargins(371, 150, 0, 0)
+//        waterBottleImageParams.setMargins(371, 150, 0, 0)
+        waterBottleImageParams.setMargins(371, 300, 0, 0)
         waterBottleImage.layoutParams = waterBottleImageParams
         waterBottleImage.id = R.id.waterBottleImage
         view.addView(waterBottleImage)
@@ -335,7 +343,7 @@ class HomeFragment : Fragment() {
                 count++
                 if (count > 4)
                     count = 0
-                delay(10000)
+                delay(5000)
             }
         }
     }

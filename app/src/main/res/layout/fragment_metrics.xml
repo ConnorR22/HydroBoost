@@ -11,12 +11,14 @@
         android:id="@+id/analyticsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="93dp"
+        android:layout_marginEnd="130dp"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:text="Daily Analytics" />
+        android:textSize="24sp"
+        android:text="Daily Analytics"
+        android:fontFamily="sans-serif-condensed"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/statisticsTitle"
@@ -27,7 +29,8 @@
         android:layout_marginEnd="93dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="Intake Statistics" />
+        android:text="Intake Statistics"
+        android:fontFamily="sans-serif-condensed"/>
 
     <View
         android:id="@+id/viewLine"
@@ -47,7 +50,8 @@
         android:layout_marginEnd="93dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="Avg. Percent Daily Intake" />
+        android:text="Avg. Percent Daily Intake"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/percentValue"
@@ -57,7 +61,8 @@
         android:layout_marginTop="155dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="100%" />
+        android:text="100%"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/intakeTitle"
@@ -68,7 +73,8 @@
         android:layout_marginEnd="93dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="Daily Intake (ML)" />
+        android:text="Daily Intake (ML)"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/intakeValue"
@@ -78,7 +84,8 @@
         android:layout_marginTop="200dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="0.0/0.0 ML" />
+        android:text="0.0/0.0 ML"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/lowestTitle"
@@ -89,7 +96,8 @@
         android:layout_marginEnd="93dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="Lowest Intake Amount" />
+        android:text="Lowest Intake Amount"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/lowestValue"
@@ -99,7 +107,8 @@
         android:layout_marginTop="245dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="0 ML" />
+        android:text="0 ML"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/highestTitle"
@@ -110,7 +119,8 @@
         android:layout_marginEnd="93dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="Highest Intake Amount" />
+        android:text="Highest Intake Amount"
+        android:fontFamily="sans-serif-condensed"/>
 
     <TextView
         android:id="@+id/highestValue"
@@ -120,6 +130,7 @@
         android:layout_marginTop="290dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="0 ML" />
+        android:text="0 ML"
+        android:fontFamily="sans-serif-condensed"/>
 
 </FrameLayout>
