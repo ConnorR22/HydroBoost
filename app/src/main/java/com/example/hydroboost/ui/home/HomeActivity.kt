@@ -8,6 +8,10 @@ package com.example.hydroboost.ui.home
  * @version: 1.0.0
  */
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,9 +23,13 @@ import com.example.hydroboost.ui.notifications.RemindersFragment
 
 class HomeActivity : AppCompatActivity() {
 
+    private val CHANNEL_ID = "notification_channel"
+
     private lateinit var homeBinding : ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        createNotificationChannel()
 
         homeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(homeBinding.root)
@@ -54,5 +62,21 @@ class HomeActivity : AppCompatActivity() {
         val transaction = manager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
+    }
+
+    private fun createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "HydroBoost Notifications"
+            val descriptionText = "Hydration reminders"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }

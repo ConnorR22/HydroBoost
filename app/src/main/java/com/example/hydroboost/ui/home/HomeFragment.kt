@@ -149,7 +149,8 @@ class HomeFragment : Fragment() {
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-            interval,
+//            interval,
+            10000,
             pendingIntent
         )
     }
@@ -166,7 +167,7 @@ class HomeFragment : Fragment() {
 
         var endTime = ""
         if (activeReminderToSet != ""){
-            endTime = activeReminderToSet!!.split(",")[2]
+            endTime = activeReminderToSet!!.split(",")[3]
         } else {
             endTime = sharedPreferencesSettings!!.getString("endTime", "").toString()
         }
