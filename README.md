@@ -1,5 +1,4 @@
-# HydroBoost
-# Water-Tracker-App
+# HydroBoost - Water Tracking App
 Water tracking app using Kotlin and Android Studios
 
 ## Project Info
